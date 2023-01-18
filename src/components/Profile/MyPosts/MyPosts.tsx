@@ -20,14 +20,19 @@ const MyPosts: React.FC<PostsPropsType> = (props) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const addPost = () => {
-        let text: string = newPostElement.current?.value ? newPostElement.current?.value : ''
+        let text: string = newPostElement!.current!.value
+        // ? newPostElement.current?.value : ''
         props.addPost(text)
+        // newPostElement && newPostElement.current &&
+        newPostElement!.current!.value = ''
     }
     return (
         <div className={s.postsBlock}>
             <h2>My posts</h2>
             <div>
-                <textarea ref={newPostElement}></textarea>
+                <div>
+                    <textarea ref={newPostElement}></textarea>
+                </div>
                 <div>
                     <button onClick={addPost}>Add post</button>
                 </div>

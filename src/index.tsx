@@ -1,18 +1,20 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import state, {addPost, StateType} from "./redux/state";
+import {rerenderEntireThree} from "./render";
+import state from "./redux/state";
 
 
-type StateIndexType = {
-    state: StateType
-    addPost: () => void
-}
+// let rerenderEntireThree = () => {
+//     ReactDOM.render(
+//         <BrowserRouter>
+//             <App state={state}
+//                  addPost={addPost}
+//             />
+//         </BrowserRouter>
+//         ,
+//         document.getElementById('root')
+//     );
+// }
 
-ReactDOM.render(
-    <App state={state}
-         addPost={addPost}/>
-    ,
-    document.getElementById('root')
-);
+
+rerenderEntireThree(state)
