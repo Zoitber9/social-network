@@ -7,11 +7,6 @@ export type DialogItemPropsType = {
     name: string
 }
 
-export type MessagePropsType = {
-    id: number
-    message: string
-}
-
 const DialogItem: React.FC<DialogItemPropsType> = (props) => {
     return(
         <div className={s.dialog}>
