@@ -3,7 +3,18 @@ import s from './MyPosts.module.css'
 import Post from "./Post/Post";
 
 
-const MyPosts = () => {
+type PostsType = {
+    id: number
+    message: string
+    likesCount: number
+}
+
+const MyPosts: React.FC = () => {
+    let postsData:  PostsType [] = [
+        {id: 1, message: 'Hi', likesCount: 12},
+        {id: 2, message: 'Hou are yuo?',  likesCount: 7},
+        {id: 3, message: 'Im faind',  likesCount: 5},
+    ]
     return (
         <div className={s.postsBlock}>
             <h2>My posts</h2>
@@ -14,8 +25,11 @@ const MyPosts = () => {
                 </div>
             </div>
             <div className={s.posts}>
-                <Post message="Hi, how are you?" like={2}/>
-                <Post message={`It's my first post`} like={7}/>
+                {postsData.map((i)=> {
+                    return (
+                        <Post id={i.id} message={i.message} like={i.likesCount}/>
+                    )}
+                )}
             </div>
         </div>
     )

@@ -14,8 +14,8 @@ function App() {
                 <Navbar/>
                 <div className="content">
                     <Routes>
-                        <Route path={'/profile/*'} element={<Profile/>}/>
-                        <Route path={"/dialogs/"} element={<Dialogs/>}/>
+                        <Route path="/profile" element={<Profile/>}/>
+                        <Route path='/dialogs' element={<Dialogs/>}/>
                         {/*<Route path=# component={News}/>*/}
                         {/*<Route path='/dialogs' component={Music}/>*/}
                     </Routes>
