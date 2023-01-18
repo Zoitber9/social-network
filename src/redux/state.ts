@@ -1,5 +1,3 @@
-
-
 export type PostsType = {
     id: number
     message: string
@@ -19,8 +17,8 @@ export type profilePageType = {
     posts: PostsType[]
 }
 export type messagesPageType = {
-    dialogs:  DialogItemPropsType[]
-    messages:  MessagePropsType[]
+    dialogs: DialogItemPropsType[]
+    messages: MessagePropsType[]
 }
 
 
@@ -30,29 +28,37 @@ export type StateType = {
 
 }
 
-let state: StateType= {
+let state: StateType = {
     profilePage: {
-        posts:   [
+        posts: [
             {id: 1, message: 'Hi', likesCount: 12},
-            {id: 2, message: 'Hou are yuo?',  likesCount: 7},
-            {id: 3, message: 'Im faind',  likesCount: 5},
+            {id: 2, message: 'Salam', likesCount: 7},
+            {id: 3, message: 'Hello', likesCount: 5},
         ],
     },
     messagesPage: {
-        dialogs:   [
-            {id: 1, name: 'Aleks'},
+        dialogs: [
+            {id: 1, name: 'John'},
             {id: 2, name: 'Andrey'},
             {id: 3, name: 'Vasia'},
             {id: 4, name: 'Lili'},
-            {id: 5, name: 'Sisi' },
-            {id: 6, name: 'Рик'},
+            {id: 5, name: 'Sisi'},
+            {id: 6, name: 'Morti'},
         ],
-        messages:  [
+        messages: [
             {id: 1, message: 'Hi'},
-            {id: 2, message: 'Hou are yuo?'},
-            {id: 3, message: 'Im faind'},
+            {id: 2, message: 'Yo'},
+            {id: 3, message: 'Yoooooo'},
         ]
     }
+}
+export let addPost = (postMessage: string) => {
+    let newPost = {
+        id: 5,
+        message: postMessage,
+        likesCount: 12
+    }
+    state.profilePage.posts.push(newPost)
 }
 
 export default state
