@@ -1,5 +1,6 @@
 .item {
     color: #282c34;
+    display: flex;
 }
 
 .item img {
