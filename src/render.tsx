@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import {addPost, StateType} from "./redux/state";
+import {addPost, StateType, updateNewPostText} from "./redux/state";
 import App from "./App";
 
 // type StateIndexType = {
@@ -14,6 +14,7 @@ export const rerenderEntireThree= (state: StateType) => {
 
             <App state={state}
                  addPost={addPost}
+                 updateNewPostText={updateNewPostText}
             />
         ,
         document.getElementById('root')

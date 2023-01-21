@@ -15,8 +15,9 @@ export type MessagePropsType = {
     message: string
 }
 
-export type profilePageType = {
+export type ProfilePageType = {
     posts: PostsType[]
+    newPostText: string
 }
 export type messagesPageType = {
     dialogs: DialogItemPropsType[]
@@ -25,7 +26,7 @@ export type messagesPageType = {
 
 
 export type StateType = {
-    profilePage: profilePageType
+    profilePage:ProfilePageType
     messagesPage: messagesPageType
 
 }
@@ -37,6 +38,7 @@ let state: StateType = {
             {id: 2, message: 'Salam', likesCount: 7},
             {id: 3, message: 'Hello', likesCount: 5},
         ],
+        newPostText: '',
     },
     messagesPage: {
         dialogs: [
@@ -45,7 +47,7 @@ let state: StateType = {
             {id: 3, name: 'Vasia'},
             {id: 4, name: 'Lili'},
             {id: 5, name: 'Sisi'},
-            {id: 6, name: 'Morti'},
+            {id: 6, name: 'Morty'},
         ],
         messages: [
             {id: 1, message: 'Hi'},
@@ -54,14 +56,20 @@ let state: StateType = {
         ]
     }
 }
-export let addPost = (postMessage: string)=> {
+export const addPost = () => {
     let newPost = {
         id: 5,
-        message: postMessage,
-        likesCount: 12
+        message: state.profilePage.newPostText,
+        likesCount: 0
     }
     state.profilePage.posts.push(newPost)
+    state.profilePage.newPostText = ''
     rerenderEntireThree(state)
 }
+export let updateNewPostText = (newText: string)=> {
+    state.profilePage.newPostText = (newText)
+    rerenderEntireThree(state)
+}
+
 
 export default state
