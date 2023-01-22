@@ -1,4 +1,7 @@
-import {rerenderEntireThree} from "../render";
+let rerenderEntireThree = () => {
+    console.log(' State changed')
+}
+
 
 export type PostsType = {
     id: number
@@ -64,11 +67,15 @@ export const addPost = () => {
     }
     state.profilePage.posts.push(newPost)
     state.profilePage.newPostText = ''
-    rerenderEntireThree(state)
+    rerenderEntireThree()
 }
-export let updateNewPostText = (newText: string)=> {
+export const updateNewPostText = (newText: string)=> {
     state.profilePage.newPostText = (newText)
-    rerenderEntireThree(state)
+    rerenderEntireThree()
+}
+
+export const subscribe = (observer:()=> void) => {
+    rerenderEntireThree = observer   // Наблюдатель(observer)
 }
 
 

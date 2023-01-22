@@ -1,20 +1,21 @@
 import React from 'react';
 import './index.css';
-import {rerenderEntireThree} from "./render";
-import state from "./redux/state";
+import state, {addPost, subscribe, updateNewPostText} from "./redux/state";
+import ReactDOM from "react-dom";
+import App from "./App";
 
 
-// let rerenderEntireThree = () => {
-//     ReactDOM.render(
-//         <BrowserRouter>
-//             <App state={state}
-//                  addPost={addPost}
-//             />
-//         </BrowserRouter>
-//         ,
-//         document.getElementById('root')
-//     );
-// }
+export const rerenderEntireThree= () => {
+    ReactDOM.render(
+        <App state={state}
+             addPost={addPost}
+             updateNewPostText={updateNewPostText}
+        />
+        ,
+        document.getElementById('root')
+    );
+}
 
 
-rerenderEntireThree(state)
+rerenderEntireThree()
+subscribe(rerenderEntireThree)
