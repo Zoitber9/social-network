@@ -18,6 +18,7 @@ export type ProfilePageType = {
 export type messagesPageType = {
     dialogs: DialogItemPropsType[]
     messages: MessagePropsType[]
+    newMessageBody:string
 }
 export type StateType = {
     profilePage: ProfilePageType
@@ -35,6 +36,9 @@ export type StoreType = {
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
+const SEND_MESSAGE = 'SEND-MESSAGE'
+
 const store: StoreType = {
     state: {
         profilePage: {
@@ -57,27 +61,14 @@ const store: StoreType = {
             messages: [
                 {id: 1, message: 'Hi'},
                 {id: 2, message: 'Yo'},
-                {id: 3, message: 'Yoooooo'},
-            ]
+                {id: 3, message: 'Yoh'},
+            ],
+            newMessageBody: ''
         }
     },
     rerenderEntireTree() {
         console.log(' State changed')
     },
-    // addPost() {
-    //     // let newPost = {
-    //     //     id: 5,
-    //     //     message: this.state.profilePage.newPostText,
-    //     //     likesCount: 0
-    //     // }
-    //     // this.state.profilePage.posts.push(newPost)
-    //     // this.state.profilePage.newPostText = ''
-    //     // this.rerenderEntireThree()
-    // },
-    // updateNewPostText(newText: string) {
-    //     // store.state.profilePage.newPostText = (newText)
-    //     // store.rerenderEntireThree()
-    // },
     subscribe(observer) {
         this.rerenderEntireTree = observer
     },
@@ -86,8 +77,7 @@ const store: StoreType = {
     },
 
     dispatch(action) {
-
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             let newPost = {
                 id: 5,
                 message: this.state.profilePage.newPostText,
@@ -96,12 +86,22 @@ const store: StoreType = {
             this.state.profilePage.posts.push(newPost)
             this.state.profilePage.newPostText = ''
             this.rerenderEntireTree()
-        } else {
-
-            if (action.type === UPDATE_NEW_POST_TEXT) {
-                this.state.profilePage.newPostText = (action.newText)
-                this.rerenderEntireTree()
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
+            this.state.profilePage.newPostText = (action.newText)
+            this.rerenderEntireTree()
+        }
+        else if (action.type === UPDATE_NEW_MESSAGE_BODY ){
+            this.state.messagesPage.newMessageBody = (action.newMessage)
+            this.rerenderEntireTree()
+        }
+        else if (action.type === SEND_MESSAGE) {
+            let newMessage = {
+                id: 1,
+                message: this.state.messagesPage.newMessageBody
             }
+            this.state.messagesPage.messages.push(newMessage)
+            this.state.messagesPage.newMessageBody = ''
+            this.rerenderEntireTree()
         }
     }
 }
@@ -111,6 +111,13 @@ export let updateNewPostTextAC = (text: string) => {
     return {
         type: UPDATE_NEW_POST_TEXT,
         newText: text
+    }
+}
+export let sendMessageAC = () => ({type: SEND_MESSAGE})
+export let updateNewMessageBodyAC = (text: string) => {
+    return {
+        type: UPDATE_NEW_MESSAGE_BODY,
+        newMessage: text
     }
 }
 export default store

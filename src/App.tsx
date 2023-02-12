@@ -28,6 +28,7 @@ function App(props: PropsType) {
                         <Route path='/dialogs'
                                element={<Dialogs
                                    dialogsMessages={props.state.messagesPage}
+                                   dispatch = {props.dispatch}
                                />}
                         />
                     </Routes>
