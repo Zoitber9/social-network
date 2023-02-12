@@ -4,16 +4,14 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import store from "./redux/state";
 
-export const rerenderEntireThree = () => {
+export const rerenderEntireTree = () => {
     ReactDOM.render(
-        <App store={store}
-             // addPost={store.addPost}
-             // updateNewPostText={store.updateNewPostText}
-        />
+        <App state={store.state}
+             dispatch={store.dispatch.bind(store)}/>
         ,
         document.getElementById('root')
     );
 }
 
-rerenderEntireThree()
-store.subscribe(rerenderEntireThree)
+rerenderEntireTree()
+store.subscribe(rerenderEntireTree)
