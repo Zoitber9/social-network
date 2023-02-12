@@ -7,12 +7,10 @@ export type DialogItemPropsType = {
     id: number
     name: string
 }
-
 export type MessagePropsType = {
     id: number
     message: string
 }
-
 export type ProfilePageType = {
     posts: PostsType[]
     newPostText: string
@@ -21,13 +19,10 @@ export type messagesPageType = {
     dialogs: DialogItemPropsType[]
     messages: MessagePropsType[]
 }
-
-
 export type StateType = {
     profilePage: ProfilePageType
     messagesPage: messagesPageType
 }
-
 export type StoreType = {
     state: StateType
     // updateNewPostText: (newText: string) => void
@@ -38,6 +33,8 @@ export type StoreType = {
     dispatch: (action: any) => void
 }
 
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const store: StoreType = {
     state: {
         profilePage: {
@@ -88,7 +85,6 @@ const store: StoreType = {
         return this.state
     },
 
-
     dispatch(action) {
 
         if (action.type === 'ADD-POST') {
@@ -100,11 +96,21 @@ const store: StoreType = {
             this.state.profilePage.posts.push(newPost)
             this.state.profilePage.newPostText = ''
             this.rerenderEntireTree()
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this.state.profilePage.newPostText = (action.newText)
-            this.rerenderEntireTree()
+        } else {
+
+            if (action.type === UPDATE_NEW_POST_TEXT) {
+                this.state.profilePage.newPostText = (action.newText)
+                this.rerenderEntireTree()
+            }
         }
     }
 }
 
+export let addPostAC = () => ({type: ADD_POST})
+export let updateNewPostTextAC = (text: string) => {
+    return {
+        type: UPDATE_NEW_POST_TEXT,
+        newText: text
+    }
+}
 export default store
