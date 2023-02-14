@@ -1,11 +1,11 @@
 import profileReducer, {addPostAC} from "./profile-reducer";
 import dialogReducer, {sendMessageAC} from "./dialogs-reducer";
 
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SEND_MESSAGE = 'SEND-MESSAGE'
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
-
 
 export type PostsType = {
     id: number
@@ -32,33 +32,23 @@ export type messagesPageType = {
 export type StateType = {
     profilePage: ProfilePageType
     messagesPage: messagesPageType
+    sidebar:any
 }
 export type StoreType = {
     state: StateType
-    // updateNewPostText: (newText: string) => void
-    // addPost: () => void
+
     rerenderEntireTree: () => void
     subscribe: (observer: () => void) => void
     getState: () => void
     dispatch: (action: ActionType) => void
 }
 
-// export type AddPostActionType = {
-//     type: 'ADD-POST'
-//     // newPostText: string
-// }
 export type addPostACType = ReturnType<typeof addPostAC>
 export type updateNewPostTextACType = {
     type: 'UPDATE-NEW-POST-TEXT'
     newText: string
 }
 
-
-
-// export type SendMessage = {
-//     type: 'SEND-MESSAGE'
-//     newMessageBody: string
-// }
 export type sendMessageACType = ReturnType<typeof sendMessageAC>
 export type updateNewMessageBodyACType = {
     type: 'UPDATE-NEW-MESSAGE-BODY'
@@ -98,7 +88,7 @@ const store: StoreType = {
             ],
             newMessageBody: ''
         },
-
+        sidebar:{}
     },
     rerenderEntireTree() {
         console.log(' State changed')
