@@ -4,12 +4,11 @@ import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Dialogs from "./components/Dialogs/Dialogs";
-import {ActionType, StateType} from "./redux/store";
+import {StoreType} from "./redux/redux-store";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 type PropsType = {
-    state: StateType
-    dispatch: (action: ActionType) => void
+    store: StoreType
 }
 
 function App(props: PropsType) {
@@ -21,14 +20,12 @@ function App(props: PropsType) {
                 <div className="content">
                     <Routes>
                         <Route path="/profile" element={<Profile
-                            profilePage={props.state.profilePage}
-                            dispatch={props.dispatch}
+                            store={props.store}
                         />}
                         />
                         <Route path='/dialogs'
-                               element={<Dialogs
-                                   dialogsMessages={props.state.messagesPage}
-                                   dispatch = {props.dispatch}
+                               element={<DialogsContainer
+                                   store={props.store}
                                />}
                         />
                     </Routes>

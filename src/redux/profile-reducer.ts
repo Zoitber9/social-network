@@ -1,7 +1,12 @@
-import {ActionType, ProfilePageType, updateNewPostTextACType} from "./store";
+import {ActionType} from './redux-store';
+import {InitialStateDialogsType} from "./dialogs-reducer";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+
+export type updateNewPostTextACType = ReturnType<typeof updateNewPostTextAC>
+export type addPostACType = ReturnType<typeof addPostAC>
+export type InitialStateProfileType = typeof initialState
 
 let initialState = {
     posts: [
@@ -12,7 +17,7 @@ let initialState = {
     newPostText: ''
 }
 
-const profileReducer = (state: ProfilePageType = initialState, action: ActionType) => {
+const profileReducer = (state: InitialStateProfileType = initialState, action: ActionType) => {
     switch (action.type) {
         case 'ADD-POST':
             let newPost = {
@@ -32,7 +37,7 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionTyp
 }
 
 export let addPostAC = () => ({type: 'ADD-POST'} as const)
-export let updateNewPostTextAC = (text: string): updateNewPostTextACType => ({
+export let updateNewPostTextAC = (text: string) => ({
     type: 'UPDATE-NEW-POST-TEXT',
     newText: text
 } as const)

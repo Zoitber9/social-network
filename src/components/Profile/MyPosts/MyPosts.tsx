@@ -1,32 +1,31 @@
 import React from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {
-    ActionType,
-    ProfilePageType,
-} from "../../../redux/store";
-import {addPostAC, updateNewPostTextAC} from "../../../redux/profile-reducer";
 
+import {InitialStateProfileType} from '../../../redux/profile-reducer';
+ 
 export type PostsPropsType = {
-    profilePage: ProfilePageType
-    dispatch: (action: ActionType) => void
+    profilePage: InitialStateProfileType
+    updateNewPostText: (text: string)=> void
+    addPost: ()=> void
+
 }
 
 const MyPosts: React.FC<PostsPropsType> = (props:PostsPropsType) => {
     let postsElements = props.profilePage.posts.map((i) => {
             return (
-                <Post id={i.id} message={i.message} like={i.likesCount}/>
+                <Post key={i.id} id={i.id}  message={i.message} like={i.likesCount}/>
             )
         }
     )
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
-    const addPost = () => {
-        props.dispatch(addPostAC())
+    const onAddPost = () => {
+        props.addPost()
     }
     let onPostChange = () => {
         let text: string = newPostElement!.current!.value
-        props.dispatch(updateNewPostTextAC(text))
+        props.updateNewPostText(text)
 
     }
     return (
@@ -40,7 +39,7 @@ const MyPosts: React.FC<PostsPropsType> = (props:PostsPropsType) => {
                        value={props.profilePage.newPostText}/>
                 </div>
                 <div>
-                    <button onClick={addPost}>Add post</button>
+                    <button onClick={onAddPost}>Add post</button>
                 </div>
             </div>
             <div className={s.posts}>
