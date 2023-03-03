@@ -9,7 +9,7 @@ import dialogReducer, {
 } from './dialogs-reducer';
 import sidebarReducer from './sidebar-reducer';
 
-let reducers = combineReducers({
+let rootReducer = combineReducers({
     profilePage: profileReducer,
     messagesPage: dialogReducer,
     sidebar: sidebarReducer
@@ -20,9 +20,11 @@ export type ActionType =
     | updateNewPostTextACType
     | sendMessageACType
     | updateNewMessageBodyACType
-let store = createStore(reducers)
+
+
+let store = createStore(rootReducer)
 export type StoreType = typeof store
 
-export type ReducerType = ReturnType<typeof reducers>
+export type ReducerType = ReturnType<typeof rootReducer>
 
 export default store

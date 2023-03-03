@@ -17,7 +17,8 @@ let initialState = {
     newPostText: ''
 }
 
-const profileReducer = (state: InitialStateProfileType = initialState, action: ActionType) => {
+const profileReducer = (state: InitialStateProfileType = initialState,
+                        action: ActionType): InitialStateProfileType => {
     switch (action.type) {
         case 'ADD-POST':
             let newPost = {

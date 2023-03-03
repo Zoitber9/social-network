@@ -4,27 +4,25 @@ export type InitialStateDialogsType = typeof initialState
 export type sendMessageACType = ReturnType<typeof sendMessageAC>
 export type updateNewMessageBodyACType = ReturnType<typeof updateNewMessageBodyAC>
 
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
-const SEND_MESSAGE = 'SEND-MESSAGE'
-
 let initialState = {
     dialogs: [
         {id: 1, name: 'Aleks'},
         {id: 2, name: 'Andrey'},
-        {id: 3, name: 'Vasia'},
+        {id: 3, name: 'Vasil'},
         {id: 4, name: 'Lili'},
-        {id: 5, name: 'Sisi'},
+        {id: 5, name: 'Yo'},
         {id: 6, name: 'Рик'},
     ],
     messages: [
         {id: 1, message: 'Hi'},
-        {id: 2, message: 'Hou are yuo?'},
-        {id: 3, message: 'Im faind'},
+        {id: 2, message: 'How are you?'},
+        {id: 3, message: 'Im fain'},
     ],
     newMessageBody: ''
 }
 
-const dialogReducer = (state: InitialStateDialogsType = initialState, action: ActionType) => {
+const dialogReducer = (state: InitialStateDialogsType = initialState,
+                       action: ActionType): InitialStateDialogsType => {
     switch (action.type) {
         case 'SEND-MESSAGE':
             let newMessage = {

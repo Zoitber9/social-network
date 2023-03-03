@@ -18,7 +18,7 @@ function App() {
                     <Route path="/profile" element={<Profile/>}
                     />
                     <Route path='/dialogs'
-                           element={<DialogsContainer/>}
+                           element={<DialogsContainer />}
                     />
                 </Routes>
             </div>
