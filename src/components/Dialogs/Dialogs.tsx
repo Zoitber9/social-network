@@ -4,12 +4,9 @@ import DialogItem from './DialogItem/DialogItem';
 import Message from './Messages/Message';
 import {ReducerType} from "../../redux/redux-store";
 
-
-
-
 type DialogsMessagesPropsType = {
-    updateNewMessageBody: (text: string)=> void
-    sendMessage:()=> void
+    updateNewMessageBody: (text: string) => void
+    sendMessage: () => void
     state: ReducerType
 }
 
@@ -54,7 +51,6 @@ const Dialogs = (props: DialogsMessagesPropsType) => {
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }

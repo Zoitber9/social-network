@@ -1,8 +1,4 @@
 import {ActionType} from './redux-store';
-import {InitialStateDialogsType} from "./dialogs-reducer";
-
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
 export type updateNewPostTextACType = ReturnType<typeof updateNewPostTextAC>
 export type addPostACType = ReturnType<typeof addPostAC>
@@ -27,8 +23,8 @@ const profileReducer = (state: InitialStateProfileType = initialState,
                 likesCount: 12
             }
             // state.posts.push(newPost)
-            state.newPostText = ''
-            return {...state, posts: [...state.posts, newPost]};
+            // state.newPostText = ''
+            return {...state, posts: [...state.posts, newPost], newPostText: ''};
         case 'UPDATE-NEW-POST-TEXT':
             // state.newPostText = (action.newText)
             return {...state, newPostText: action.newText};

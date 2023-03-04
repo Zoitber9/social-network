@@ -8,11 +8,13 @@ import dialogReducer, {
     updateNewMessageBodyACType
 } from './dialogs-reducer';
 import sidebarReducer from './sidebar-reducer';
+import usersReducer, {FollowACType, SetUserACType, UnFollowACType} from "./users-reducer";
 
 let rootReducer = combineReducers({
     profilePage: profileReducer,
     messagesPage: dialogReducer,
-    sidebar: sidebarReducer
+    sidebar: sidebarReducer,
+    usersPage:usersReducer
 })
 
 export type ActionType =
@@ -20,7 +22,9 @@ export type ActionType =
     | updateNewPostTextACType
     | sendMessageACType
     | updateNewMessageBodyACType
-
+    | FollowACType
+    | UnFollowACType
+    | SetUserACType
 
 let store = createStore(rootReducer)
 export type StoreType = typeof store
