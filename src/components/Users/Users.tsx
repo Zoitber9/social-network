@@ -1,6 +1,8 @@
 import React from 'react';
 import {InitialStateUsersType, UserType} from '../../redux/users-reducer';
 import s from './users.module.css'
+import axios from "axios";
+import userPhoto from '../../assets/images/userPhoto.png'
 
 type UsersPropsType = {
     usersPage: InitialStateUsersType
@@ -9,46 +11,11 @@ type UsersPropsType = {
     setUsers: (users: UserType[]) => void
 }
 
-
 const Users = (props: UsersPropsType) => {
-
     if (props.usersPage.users.length === 0) {
-        props.setUsers([
-            {
-                id: 1,
-                photoURL: 'https://media.istockphoto.com/id/1300845620/' +
-                    'vector/user-icon-flat-isolated-on-white-background-user' +
-                    '-symbol-vector-illustration.jpg?s=1024x1024&w=is&k=20&c=' +
-                    '-mUWsTSENkugJ3qs5covpaj-bhYpxXY-v9RDpzsw504=',
-                followed: false,
-                fullName: 'Drus',
-                status: 'I am a boss',
-                location: {city: 'Brest', country: 'Belarus'}
-            },
-            {
-                id: 2,
-                photoURL: 'https://media.istockphoto.com/id/1300845620/' +
-                    'vector/user-icon-flat-isolated-on-white-background-user' +
-                    '-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=' +
-                    'yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=',
-                followed: true,
-                fullName: 'Vasia',
-                status: 'I am small boss',
-                location: {city: 'Moscow', country: 'Russia'}
-            },
-            {
-                id: 3,
-                photoURL: 'https://media.istockphoto.com/id/1300845620/' +
-                    'vector/user-icon-flat-isolated-on-white-background-user' +
-                    '-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=' +
-                    'yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=',
-                followed: false,
-                fullName: 'Den',
-                status: 'I am not boss',
-                location: {city: 'Kiev', country: 'Ukraine'}
-            },
-
-        ])
+        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+            .then(response => {debugger; props.setUsers(response.data.items)}
+            )
     }
 
     return (
@@ -63,7 +30,7 @@ const Users = (props: UsersPropsType) => {
 
                 return (<div key={i.id} className={s.user_container}>
                         <div className={s.user_img_btn}>
-                            <div><img className={s.image} src={i.photoURL}
+                            <div><img className={s.image} src={userPhoto }
                                       alt="UserAvatar"/></div>
                             {i.followed
                                 ? <button className={s.button}
@@ -78,8 +45,8 @@ const Users = (props: UsersPropsType) => {
                                 <div>{i.status}</div>
                             </div>
                             <div className={s.location}>
-                                <div>{i.location.country}</div>
-                                <div>{i.location.city}</div>
+                                <div>{'i.location.country'}</div>
+                                <div>{'i.location.city'}</div>
                             </div>
                         </div>
 
