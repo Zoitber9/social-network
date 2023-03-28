@@ -12,53 +12,58 @@ type UsersPropsType = {
 }
 
 const Users = (props: UsersPropsType) => {
-    if (props.usersPage.users.length === 0) {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
-            .then(response => {debugger; props.setUsers(response.data.items)}
-            )
-    }
+    let getUsers = () => {
 
-    return (
-        <div>
-            {props.usersPage.users.map((i) => {
-                const follow = () => {
-                    props.follow(i.id)
-                }
-                const unFollow = () => {
-                    props.unFollow(i.id)
-                }
-
-                return (<div key={i.id} className={s.user_container}>
-                        <div className={s.user_img_btn}>
-                            <div><img className={s.image} src={userPhoto }
-                                      alt="UserAvatar"/></div>
-                            {i.followed
-                                ? <button className={s.button}
-                                          onClick={follow}>FOLLOW</button>
-                                : <button className={s.button}
-                                          onClick={unFollow}>UNFOLLOW</button>
-                            }
-                        </div>
-                        <div className={s.info}>
-                            <div className={s.info_name_status}>
-                                <div>{i.fullName}</div>
-                                <div>{i.status}</div>
-                            </div>
-                            <div className={s.location}>
-                                <div>{'i.location.country'}</div>
-                                <div>{'i.location.city'}</div>
-                            </div>
-                        </div>
-
-
-                    </div>
-
+        if (props.usersPage.users.length === 0) {
+            axios.get('https://social-network.samuraijs.com/api/1.0/users')
+                .then(response => {
+                        debugger;
+                        props.setUsers(response.data.items)
+                    }
                 )
-            })}
+        }
+    }
+    return (
 
+        <div>
+            <button onClick={getUsers}>Get Users</button>
+            {
+                props.usersPage.users.map((i) => {
+                    const follow = () => {
+                        props.follow(i.id)
+                    }
+                    const unFollow = () => {
+                        props.unFollow(i.id)
+                    }
 
+                    return (<div key={i.id} className={s.user_container}>
+                            <div className={s.user_img_btn}>
+                                <div><img className={s.image} src={userPhoto}
+                                          alt="UserAvatar"/></div>
+                                {i.followed
+                                    ? <button className={s.button}
+                                              onClick={follow}>FOLLOW</button>
+                                    : <button className={s.button}
+                                              onClick={unFollow}>UNFOLLOW</button>
+                                }
+                            </div>
+                            <div className={s.info}>
+                                <div className={s.info_name_status}>
+                                    <div>{i.fullName}</div>
+                                    <div>{i.status}</div>
+                                </div>
+                                <div className={s.location}>
+                                    <div>{'i.location.country'}</div>
+                                    <div>{'i.location.city'}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    )
+                })}
         </div>
-    );
-};
+    )
+}
+
 
 export default Users;

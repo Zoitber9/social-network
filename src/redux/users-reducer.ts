@@ -1,5 +1,4 @@
 import {ActionType} from './redux-store';
-import users from '../components/Users/Users';
 
 export type FollowACType = ReturnType<typeof followAC>
 export type UnFollowACType = ReturnType<typeof unFollowAC>
@@ -32,14 +31,16 @@ let initialState = {
 const usersReducer = (state: InitialStateUsersType = initialState, action: ActionType): InitialStateUsersType => {
     switch (action.type) {
         case 'FOLLOW':
-            return {...state,
+            return {
+                ...state,
                 users: state.users.map(u => u.id === action.userId ? {
                     ...u,
                     followed: false
                 } : u)
             }
         case 'UNFOLLOW':
-            return {...state,
+            return {
+                ...state,
                 users: state.users.map(u => u.id === action.userId ? {
                     ...u,
                     followed: true
