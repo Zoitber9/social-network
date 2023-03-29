@@ -14,7 +14,7 @@ let rootReducer = combineReducers({
     profilePage: profileReducer,
     messagesPage: dialogReducer,
     sidebar: sidebarReducer,
-    usersPage:usersReducer
+    usersPage: usersReducer
 })
 
 export type ActionType =

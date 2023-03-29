@@ -6,15 +6,17 @@ const Navbar: React.FC = () => {
     return (
         <nav className={s.nav}>
             <div className={s.item}>
-
                 <NavLink to="/profile" className={({isActive}) =>
                     isActive ? s.active : undefined
                 }>Profile</NavLink>
             </div>
             <div className={s.item}>
-
                 <NavLink className={({isActive}) =>
                     isActive ? s.active : undefined} to="/dialogs">Message</NavLink>
+            </div>
+            <div className={s.item}>
+                <NavLink className={({isActive}) =>
+                    isActive ? s.active : undefined} to="/users">Users</NavLink>
             </div>
             <div className={s.item}>
                 <NavLink to="/news" className={({isActive}) =>
