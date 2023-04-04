@@ -3,22 +3,37 @@ import {connect} from 'react-redux';
 import Users from './Users';
 import {ReducerType} from '../../redux/redux-store';
 import {Dispatch} from 'redux';
-import {followAC, InitialStateUsersType, setUserAC, unFollowAC, UserType} from '../../redux/users-reducer';
+import {
+    followAC,
+    setCurrentPageAC,
+    setTotalUsersCountAC,
+    setUserAC,
+    unFollowAC,
+    UserType
+} from '../../redux/users-reducer';
 
 type MapStatePropsType = {
-    usersPage: InitialStateUsersType
+    users: Array<UserType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
 type MapDispatchToPropsType = {
-    follow: (userId: number)=> void
-    unFollow: (userId: number)=> void
-    setUsers: (users: UserType[])=> void
+    follow: (userId: number) => void
+    unFollow: (userId: number) => void
+    setUsers: (users: UserType[]) => void
+    setCurrentPage: (pageNumber: number) => void
+    setTotalUsersCount: (totalCount: number) => void
 }
 
 
 const mapStateToProps = (state: ReducerType): MapStatePropsType => {
     return {
-        usersPage: state.usersPage
+        users: state.usersPage.users,
+        pageSize: state.usersPage.pageSize,
+        totalUsersCount: state.usersPage.totalUsersCount,
+        currentPage: state.usersPage.currentPage
     }
 }
 
@@ -30,14 +45,18 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
         unFollow: (userId: number) => {
             dispatch(unFollowAC(userId))
         },
-        setUsers: (users:UserType[]) => {
+        setUsers: (users: UserType[]) => {
             dispatch(setUserAC(users))
+        },
+        setCurrentPage: (pageNumber: number) => {
+            dispatch(setCurrentPageAC(pageNumber))
+        },
+        setTotalUsersCount: (totalCount: number) => {
+            dispatch(setTotalUsersCountAC(totalCount))
         }
-
     }
 }
 
 
-
-export default  connect(mapStateToProps, mapDispatchToProps)(Users)
-// export default UsersContaier
+export default connect(mapStateToProps, mapDispatchToProps)(Users)
+// export default UsersContainer

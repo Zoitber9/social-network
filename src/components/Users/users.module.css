@@ -53,3 +53,7 @@
     background-color: #6f9a37;
     color: white;
 }
+
+.selectedPage{
+    font-weight: bold;
+}
