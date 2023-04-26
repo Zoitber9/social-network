@@ -76,12 +76,10 @@ export const setUserAC = (users: Array<UserType>) => ({
     type: 'SET-USERS',
     users
 } as const)
-
 export const setCurrentPageAC = (currentPage: number) => ({
     type: 'SET-CURRENT-PAGE',
     currentPage
 } as const)
-
 export const setTotalUsersCountAC = (totalCount: number) => ({
     type: 'SET-TOTAL-USERS-COUNT',
     totalCount
