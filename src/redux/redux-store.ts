@@ -12,7 +12,7 @@ import usersReducer, {
     FollowACType,
     setCurrentPageACType,
     setTotalUsersCountACType,
-    SetUserACType, toggleIsFetchingAC, toggleIsFetchingACType,
+    SetUserACType, toggleIsFetchingACType,
     UnFollowACType
 } from "./users-reducer";
 

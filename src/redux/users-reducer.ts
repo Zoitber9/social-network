@@ -1,11 +1,11 @@
 import {ActionType} from './redux-store';
 
-export type FollowACType = ReturnType<typeof followAC>
-export type UnFollowACType = ReturnType<typeof unFollowAC>
-export type SetUserACType = ReturnType<typeof setUserAC>
-export type setCurrentPageACType = ReturnType<typeof setCurrentPageAC>
-export type setTotalUsersCountACType = ReturnType<typeof setTotalUsersCountAC>
-export type toggleIsFetchingACType = ReturnType<typeof toggleIsFetchingAC>
+export type FollowACType = ReturnType<typeof follow>
+export type UnFollowACType = ReturnType<typeof unFollow>
+export type SetUserACType = ReturnType<typeof setUsers>
+export type setCurrentPageACType = ReturnType<typeof setCurrentPage>
+export type setTotalUsersCountACType = ReturnType<typeof setTotalUsersCount>
+export type toggleIsFetchingACType = ReturnType<typeof toggleIsFetching>
 
 export type InitialStateUsersType = {
     users: Array<UserType>
@@ -71,25 +71,25 @@ const usersReducer = (state: InitialStateUsersType = initialState, action: Actio
     }
 }
 
-export const followAC = (userId: number) => ({type: 'FOLLOW', userId} as const)
-export const unFollowAC = (userId: number) => ({
+export const follow = (userId: number) => ({type: 'FOLLOW', userId} as const)
+export const unFollow = (userId: number) => ({
     type: 'UNFOLLOW',
     userId
 } as const)
 
-export const setUserAC = (users: Array<UserType>) => ({
+export const setUsers = (users: Array<UserType>) => ({
     type: 'SET-USERS',
     users
 } as const)
-export const setCurrentPageAC = (currentPage: number) => ({
+export const setCurrentPage = (currentPage: number) => ({
     type: 'SET-CURRENT-PAGE',
     currentPage
 } as const)
-export const setTotalUsersCountAC = (totalCount: number) => ({
+export const setTotalUsersCount= (totalCount: number) => ({
     type: 'SET-TOTAL-USERS-COUNT',
     totalCount
 } as const)
-export const toggleIsFetchingAC = (isFetching: boolean) => ({
+export const toggleIsFetching = (isFetching: boolean) => ({
     type: 'TOGGLE-IS-FETCHING',
     isFetching
 } as const)
