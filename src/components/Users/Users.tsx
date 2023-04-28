@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './users.module.css';
 import {UserType} from "../../redux/users-reducer";
+import UserAvatar from '../../assets/images/userPhoto.png'
 
 
 type UsersPropsType = {
@@ -18,6 +19,9 @@ const Users = (props: UsersPropsType) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
     let pages = []
     for(let i =1; i<= pagesCount; i++) {
+        if( i === 21){
+            break
+        }
         pages.push(i)
     }
     return (
@@ -27,7 +31,7 @@ const Users = (props: UsersPropsType) => {
                         return <span onClick={() => {
                             props.onPageChanged(p)
                         }} className={props.currentPage === p
-                            ? s.selectedPage + ' ' + s.numberPage : s.numberPage}>{p}</span>
+                            ? s.selectedPage + ' ' + s.numberPage : s.numberPage}>{p } </span>
                     }
                 )}
 
@@ -42,7 +46,7 @@ const Users = (props: UsersPropsType) => {
 
                 return (<div key={i.id} className={s.user_container}>
                         <div className={s.user_img_btn}>
-                            <div><img className={s.image} src={i.photoURL ? i.photoURL : 'userPhoto'}
+                            <div><img className={s.image} src={i.photoURL ? i.photoURL : UserAvatar}
                                       alt="UserAvatar"/></div>
                             {i.followed
                                 ? <button className={s.button} onClick={follow}>FOLLOW</button>
@@ -51,7 +55,7 @@ const Users = (props: UsersPropsType) => {
                         </div>
                         <div className={s.info}>
                             <div className={s.info_name_status}>
-                                <div>{i.fullName}</div>
+                                <div className={s.userName}>{i.fullName}</div>
                                 <div>{i.status}</div>
                             </div>
                         </div>
