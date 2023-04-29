@@ -1,6 +1,6 @@
 import {combineReducers, createStore} from 'redux';
 import profileReducer, {
-    addPostACType,
+    addPostACType, setUsersProfileType,
     updateNewPostTextACType
 } from './profile-reducer';
 import dialogReducer, {
@@ -34,6 +34,7 @@ export type ActionType =
     | setCurrentPageACType
     | setTotalUsersCountACType
     | toggleIsFetchingACType
+    | setUsersProfileType
 
 
 let store = createStore(rootReducer)

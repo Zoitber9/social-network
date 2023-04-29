@@ -3,11 +3,14 @@ import s from './Profile.module.css'
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/myPostsContainer";
 
+type ProfileType = {
+    profile: any
+}
 
-const Profile: React.FC = () => {
+const Profile: React.FC<ProfileType> = (props ) => {
     return (
         <div className={s.content}>
-            <ProfileInfo/>
+            <ProfileInfo profile={props.profile}/>
             <MyPostsContainer/>
         </div>
     )
