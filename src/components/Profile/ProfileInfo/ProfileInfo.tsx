@@ -9,13 +9,15 @@ type ProfileInfoType = {
 
 
 const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
-    if(!props.profile) {
+    if (!props.profile) {
         return <Preloader/>
     }
 
     return (
         <div>
-            <div> <img src={"https://pibig.info/uploads/posts/2022-08/thumbs/1659391395_51-pibig-info-p-krasivii-gradientnii-fon-krasivo-51.jpg"}/>
+            <div><img
+                src={"https://pibig.info/uploads/posts/2022-08/thumbs/1659391395_51-pibig-info-p-krasivii-gradientnii-fon-krasivo-51.jpg"}
+                alt={'photo'}/>
             </div>
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.small} alt=""/>

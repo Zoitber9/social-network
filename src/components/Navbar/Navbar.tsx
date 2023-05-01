@@ -6,29 +6,26 @@ const Navbar: React.FC = () => {
     return (
         <nav className={s.nav}>
             <div className={s.item}>
-                <NavLink to="/profile" className={({isActive}) =>
-                    isActive ? s.active : undefined
-                }>Profile</NavLink>
+                <NavLink to="/profile" className={(isActive) =>isActive ? s.active : s.item}> Profile </NavLink>
             </div>
             <div className={s.item}>
-                <NavLink className={({isActive}) =>
-                    isActive ? s.active : undefined} to="/dialogs">Message</NavLink>
+                <NavLink to="/dialogs" className={(isActive) =>isActive ? s.active : s.item}> Messages </NavLink>
             </div>
             <div className={s.item}>
-                <NavLink className={({isActive}) =>
-                    isActive ? s.active : undefined} to="/users">Users</NavLink>
+                    <NavLink to="/users" className={(isActive) =>isActive ? s.active : s.item}> Users </NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to="/news" className={({isActive}) =>
-                    isActive ? s.active : undefined}>News</NavLink>
+                    <NavLink to="/news" className={(isActive) =>isActive ? s.active : s.item}> News</NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to="music" className={({isActive}) =>
-                    isActive ? s.active : undefined}>Music</NavLink>
+
+                <NavLink to="/music" className={(isActive) =>isActive ? s.active : s.item}> Music </NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to='setting' className={({isActive}) =>
-                    isActive ? s.active : undefined}>Setting</NavLink>
+                <NavLink to="/settings" className={(isActive) =>isActive ? s.active : s.item}> Settings </NavLink>
+            </div>
+            <div className={s.item}>
+                <NavLink to="/friends" className={(isActive) =>isActive ? s.active : s.friends}> Friends </NavLink>
             </div>
         </nav>
     )

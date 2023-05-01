@@ -19,14 +19,14 @@ type MapStatePropsType = {
     isFetching: boolean
 }
 
-type MapDispatchToPropsType = {
-    follow: (userId: number) => void
-    unFollow: (userId: number) => void
-    setUsers: (users: UserType[]) => void
-    setCurrentPage: (pageNumber: number) => void
-    setTotalUsersCount: (totalCount: number) => void
-    toggleIsFetching: (issFetching: boolean) => void
-}
+// type MapDispatchToPropsType = {
+//     follow: (userId: number) => void
+//     unFollow: (userId: number) => void
+//     setUsers: (users: UserType[]) => void
+//     setCurrentPage: (pageNumber: number) => void
+//     setTotalUsersCount: (totalCount: number) => void
+//     toggleIsFetching: (issFetching: boolean) => void
+// }
 
 type UsersAPIComponentPropsType = {
     users: Array<UserType>
