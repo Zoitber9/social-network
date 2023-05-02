@@ -15,12 +15,14 @@ import usersReducer, {
     SetUserACType, toggleIsFetchingACType,
     UnFollowACType
 } from "./users-reducer";
+import authReducer, {setUserDataACType} from "./auth-reducer";
 
 let rootReducer = combineReducers({
     profilePage: profileReducer,
     messagesPage: dialogReducer,
     sidebar: sidebarReducer,
-    usersPage: usersReducer
+    usersPage: usersReducer,
+    auth: authReducer,
 })
 
 export type ActionType =
@@ -35,6 +37,7 @@ export type ActionType =
     | setTotalUsersCountACType
     | toggleIsFetchingACType
     | setUsersProfileType
+    | setUserDataACType
 
 
 let store = createStore(rootReducer)
