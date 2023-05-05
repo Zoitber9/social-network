@@ -12,7 +12,7 @@ import usersReducer, {
     FollowACType,
     setCurrentPageACType,
     setTotalUsersCountACType,
-    SetUserACType, toggleIsFetchingACType,
+    SetUserACType, toggleIsFetchingACType, toggleIsFollowingInProgressACType,
     UnFollowACType
 } from "./users-reducer";
 import authReducer, {setUserDataACType} from "./auth-reducer";
@@ -38,6 +38,7 @@ export type ActionType =
     | toggleIsFetchingACType
     | setUsersProfileType
     | setUserDataACType
+    | toggleIsFollowingInProgressACType
 
 
 let store = createStore(rootReducer)
