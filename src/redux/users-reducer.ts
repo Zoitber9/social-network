@@ -46,7 +46,7 @@ const usersReducer = (state: InitialStateUsersType = initialState, action: Actio
                 ...state,
                 users: state.users.map(u => u.id === action.userId ? {
                     ...u,
-                    followed: false
+                    followed: true
                 } : u)
             }
         case 'UNFOLLOW':
@@ -54,7 +54,7 @@ const usersReducer = (state: InitialStateUsersType = initialState, action: Actio
                 ...state,
                 users: state.users.map(u => u.id === action.userId ? {
                     ...u,
-                    followed: true
+                    followed: false
                 } : u)
             }
         case 'SET-USERS':
@@ -85,7 +85,7 @@ export const setCurrentPage = (currentPage: number) => ({
     type: 'SET-CURRENT-PAGE',
     currentPage
 } as const)
-export const setTotalUsersCount= (totalCount: number) => ({
+export const setTotalUsersCount = (totalCount: number) => ({
     type: 'SET-TOTAL-USERS-COUNT',
     totalCount
 } as const)

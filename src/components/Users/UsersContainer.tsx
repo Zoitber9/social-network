@@ -90,7 +90,6 @@ class UsersContainer extends React.Component<UsersAPIComponentPropsType, {}> {
     }
 }
 
-
 const mapStateToProps = (state: ReducerType): MapStatePropsType => {
     return {
         users: state.usersPage.users,
@@ -123,7 +122,6 @@ const mapStateToProps = (state: ReducerType): MapStatePropsType => {
 //         }
 //     }
 // }
-
 
 export default connect(mapStateToProps, {
     follow,
