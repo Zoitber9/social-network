@@ -9,6 +9,7 @@ import {
 import Users from "./Users";
 import axios from "axios";
 import Preloader from "../../common/preloader/preloader";
+import {usersAPI} from "../../api/api";
 
 
 type MapStatePropsType = {
@@ -53,19 +54,20 @@ class UsersContainer extends React.Component<UsersAPIComponentPropsType, {}> {
 
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        instance.get(`users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
-            this.props.toggleIsFetching(false)
-            this.props.setUsers(response.data.items)
-            this.props.setTotalUsersCount(response.data.totalCount)
-        })
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+            .then(data => {
+                this.props.toggleIsFetching(false)
+                this.props.setUsers(data.items)
+                this.props.setTotalUsersCount(data.totalCount)
+            })
     }
 
     onPageChanged = (pageNumber: number) => {
         this.props.toggleIsFetching(true)
         this.props.setCurrentPage(pageNumber)
-        instance.get(`users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
+        usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
             this.props.toggleIsFetching(false)
-            this.props.setUsers(response.data.items)
+            this.props.setUsers(data.items)
         })
     }
 
