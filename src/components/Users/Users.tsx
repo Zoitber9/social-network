@@ -14,7 +14,6 @@ type UsersPropsType = {
     onPageChanged: (pageNumber: number) => void
     totalUsersCount: number
     pageSize: number
-    toggleIsFollowingInProgress: (userId: number, isFetching: boolean)=>void
     followingInProgress: Array<number>
 }
 
@@ -39,23 +38,25 @@ const Users = (props: UsersPropsType) => {
                 </div>
                 {props.users.map((i) => {
                     const follow = () => {
-                        props.toggleIsFollowingInProgress(i.id, true)
-                        usersAPI.follow(i.id).then(data => {
-                            if(data.resultCode === 0) {
-                                props.follow(i.id)
-                            }
-                            props.toggleIsFollowingInProgress(i.id, false)
-                        })
+                        props.follow(i.id)
+                        // props.toggleIsFollowingInProgress(i.id, true)
+                        // usersAPI.follow(i.id).then(data => {
+                        //     if(data.resultCode === 0) {
+                        //         props.follow(i.id)
+                        //     }
+                        //     props.toggleIsFollowingInProgress(i.id, false)
+                        // })
                     }
                     const unFollow = () => {
-                        props.toggleIsFollowingInProgress(i.id, true)
-                        usersAPI.unfollow(i.id).then(data => {
-                            if(data.resultCode === 0) {
-                                props.unFollow(i.id)
-                            }
-                            props.toggleIsFollowingInProgress(i.id, false)
-                        })
                         props.unFollow(i.id)
+                        // props.toggleIsFollowingInProgress(i.id, true)
+                        // usersAPI.unfollow(i.id).then(data => {
+                        //     if(data.resultCode === 0) {
+                        //         props.unFollow(i.id)
+                        //     }
+                        //     props.toggleIsFollowingInProgress(i.id, false)
+                        // })
+                        // props.unFollow(i.id)
                     }
 
                     return (<div key={i.id} className={s.user_container}>

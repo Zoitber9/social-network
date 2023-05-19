@@ -1,4 +1,4 @@
-import {combineReducers, createStore} from 'redux';
+import {applyMiddleware, combineReducers, createStore} from 'redux';
 import profileReducer, {
     addPostACType, setUsersProfileType,
     updateNewPostTextACType
@@ -16,6 +16,7 @@ import usersReducer, {
     UnFollowACType
 } from "./users-reducer";
 import authReducer, {setUserDataACType} from "./auth-reducer";
+import thunk from 'redux-thunk';
 
 let rootReducer = combineReducers({
     profilePage: profileReducer,
@@ -41,7 +42,7 @@ export type ActionType =
     | toggleIsFollowingInProgressACType
 
 
-let store = createStore(rootReducer)
+let store = createStore(rootReducer, applyMiddleware(thunk))
 export type StoreType = typeof store
 
 export type ReducerType = ReturnType<typeof rootReducer>
