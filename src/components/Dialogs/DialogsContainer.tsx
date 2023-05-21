@@ -1,12 +1,13 @@
 import React from 'react';
-import {sendMessageAC, updateNewMessageBodyAC} from '../../redux/dialogs-reducer';
+import {InitialStateDialogsType, sendMessageAC, updateNewMessageBodyAC} from '../../redux/dialogs-reducer';
 import Dialogs from './Dialogs';
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {ReducerType} from "../../redux/redux-store";
 
 type mapStateToPropsType = {
-    state: ReducerType
+    dialogsPage: InitialStateDialogsType
+    isAuth: boolean
 }
 
 type mapDispatchToPropsType = {
@@ -16,7 +17,8 @@ type mapDispatchToPropsType = {
 
 const mapStateToProps = (state: ReducerType): mapStateToPropsType => {
     return {
-        state: state
+        dialogsPage: state.messagesPage,
+        isAuth: state.auth.isAuth
     }
 }
 const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {

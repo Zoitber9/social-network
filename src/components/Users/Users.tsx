@@ -3,8 +3,6 @@ import s from './users.module.css';
 import {UserType} from "../../redux/users-reducer";
 import UserAvatar from '../../assets/images/userPhoto.png'
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "../../api/api";
-
 
 type UsersPropsType = {
     users: Array<UserType>
@@ -39,24 +37,9 @@ const Users = (props: UsersPropsType) => {
                 {props.users.map((i) => {
                     const follow = () => {
                         props.follow(i.id)
-                        // props.toggleIsFollowingInProgress(i.id, true)
-                        // usersAPI.follow(i.id).then(data => {
-                        //     if(data.resultCode === 0) {
-                        //         props.follow(i.id)
-                        //     }
-                        //     props.toggleIsFollowingInProgress(i.id, false)
-                        // })
                     }
                     const unFollow = () => {
                         props.unFollow(i.id)
-                        // props.toggleIsFollowingInProgress(i.id, true)
-                        // usersAPI.unfollow(i.id).then(data => {
-                        //     if(data.resultCode === 0) {
-                        //         props.unFollow(i.id)
-                        //     }
-                        //     props.toggleIsFollowingInProgress(i.id, false)
-                        // })
-                        // props.unFollow(i.id)
                     }
 
                     return (<div key={i.id} className={s.user_container}>
