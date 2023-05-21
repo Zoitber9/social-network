@@ -3,7 +3,7 @@ import Profile from './Profile';
 import {connect} from 'react-redux';
 import {ReducerType} from '../../redux/redux-store';
 import {withRouter} from 'react-router-dom';
-import {getUserProfile} from "../../redux/profile-reducer";
+import {getUsersProfile} from "../../redux/profile-reducer";
 
 
 type ProfileContainerType = {
@@ -37,5 +37,5 @@ let mapStateToProps = (state: ReducerType) => ({
 let withUrlDataContainerComponent = withRouter<any, any>(ProfileContainer)
 
 export default connect(mapStateToProps, {
-    getUserProfile
+    getUsersProfile
 })(withUrlDataContainerComponent)
