@@ -9,15 +9,12 @@ export type InitialStateAuthType = {
     isAuth: boolean
 }
 
-
 let initialState: InitialStateAuthType = {
     id: null,
     email: null,
     login: null,
     isAuth: false,
 }
-
-
 
 const authReducer = (state = initialState, action: ActionType): InitialStateAuthType => {
     switch (action.type) {
@@ -33,6 +30,7 @@ const authReducer = (state = initialState, action: ActionType): InitialStateAuth
             return state;
     }
 }
+
 export type setUserDataACType = ReturnType<typeof setAuthUserData>
 export const setAuthUserData = (id: number, email: string, login: string) => {
     return {
@@ -40,6 +38,7 @@ export const setAuthUserData = (id: number, email: string, login: string) => {
         data: {id, email, login}
     } as const
 }
+
 export const getAuthUserData = () => (dispatch: Dispatch) => {
     authAPI.me()
         .then(res => {
@@ -49,8 +48,6 @@ export const getAuthUserData = () => (dispatch: Dispatch) => {
             }
         })
 }
-
-
 
 
 export default authReducer

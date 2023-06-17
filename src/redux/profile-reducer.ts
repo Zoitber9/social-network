@@ -86,4 +86,4 @@ export let getUsersProfile = (userId: number) => (dispatch: Dispatch) => {
             dispatch(setUsersProfile(response.data))
         })
 }
-    export default profileReducer
+export default profileReducer
