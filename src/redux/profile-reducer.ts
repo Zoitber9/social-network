@@ -59,7 +59,7 @@ const profileReducer = (state: InitialStateProfileType = initialState, action: A
             let newPost = {
                 id: 5,
                 message: state.newPostText,
-                likesCount: 12
+                likesCount: 30
             }
             return {...state, posts: [...state.posts, newPost], newPostText: ''};
         case 'UPDATE-NEW-POST-TEXT':
