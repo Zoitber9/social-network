@@ -12,7 +12,8 @@ const Header: React.FC<HeaderPropsType> = (props) => {
     return (
         <header className={s.header}>
             <img
-                src={"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/NASA_logo.svg/200px-NASA_logo.svg.png"} alt={'img'}/>
+                src={"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/NASA_logo.svg/200px-NASA_logo.svg.png"}
+                alt={'img'}/>
             <div className={s.loginBlock}>
                 {props.isAuth ? props.login
                     : <NavLink to={'/login'}>Login</NavLink>}
@@ -20,4 +21,5 @@ const Header: React.FC<HeaderPropsType> = (props) => {
         </header>
     )
 }
+
 export default Header
