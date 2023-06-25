@@ -5,7 +5,6 @@ import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {ReducerType} from "../../redux/redux-store";
 import {withAuthRedirect} from "../../../src/components/hoc/WithAuthRedirect";
-import {Redirect} from 'react-router-dom';
 
 
 type mapStateToPropsType = {

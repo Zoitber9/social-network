@@ -23,7 +23,6 @@ class ProfileContainer extends React.Component<ProfileContainerType, any> {
         this.props.getUsersProfile(userId)
     }
 
-
     render() {
         return (
             <Profile profile={this.props.profile}/>
