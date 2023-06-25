@@ -8,7 +8,6 @@ import Users from "./Users";
 import Preloader from "../../common/preloader/preloader";
 import {withAuthRedirect} from "../../../src/components/hoc/WithAuthRedirect";
 
-
 type MapStatePropsType = {
     users: Array<UserType>
     pageSize: number
@@ -17,15 +16,6 @@ type MapStatePropsType = {
     isFetching: boolean
     followingInProgress: Array<number>
 }
-
-// type MapDispatchToPropsType = {
-//     follow: (userId: number) => void
-//     unFollow: (userId: number) => void
-//     setUsers: (users: UserType[]) => void
-//     setCurrentPage: (pageNumber: number) => void
-//     setTotalUsersCount: (totalCount: number) => void
-//     toggleIsFetching: (issFetching: boolean) => void
-// }
 
 type UsersAPIComponentPropsType = {
     users: Array<UserType>
