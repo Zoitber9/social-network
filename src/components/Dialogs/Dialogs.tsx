@@ -3,7 +3,7 @@ import s from './Dialogs.module.css'
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Messages/Message';
 import {InitialStateDialogsType} from "../../redux/dialogs-reducer";
-import {Redirect} from "react-router-dom";
+
 
 type DialogsMessagesPropsType = {
     updateNewMessageBody: (text: string) => void
@@ -32,7 +32,7 @@ const Dialogs = (props: DialogsMessagesPropsType) => {
         props.updateNewMessageBody(text)
     }
 
-    if (!props.isAuth) return <Redirect to={'/login'}/>
+    // if (!props.isAuth) return <Redirect to={'/login'}/>
 
     return (
         <div className={s.dialogs}>

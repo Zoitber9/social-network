@@ -1,9 +1,10 @@
 import React from "react";
 import Profile from './Profile';
-import {connect} from 'react-redux';
+import {connect, MapStateToProps} from 'react-redux';
 import {ReducerType} from '../../redux/redux-store';
 import {withRouter} from 'react-router-dom';
 import {getUsersProfile} from "../../redux/profile-reducer";
+import {withAuthRedirect} from "../../../src/components/hoc/WithAuthRedirect";
 
 
 type ProfileContainerType = {
@@ -30,11 +31,13 @@ class ProfileContainer extends React.Component<ProfileContainerType, any> {
     }
 }
 
+let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
+
 let mapStateToProps = (state: ReducerType) => ({
     profile: state.profilePage.profile
 })
 
-let withUrlDataContainerComponent = withRouter<any, any>(ProfileContainer)
+let withUrlDataContainerComponent = withRouter<any, any>(AuthRedirectComponent)
 
 export default connect(mapStateToProps, {
     getUsersProfile
