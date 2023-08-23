@@ -7,6 +7,7 @@ import {
 import Users from "./Users";
 import Preloader from "../../common/preloader/preloader";
 import {withAuthRedirect} from "../../../src/components/hoc/WithAuthRedirect";
+import {compose} from "redux";
 
 type MapStatePropsType = {
     users: Array<UserType>
@@ -17,6 +18,7 @@ type MapStatePropsType = {
     followingInProgress: Array<number>
 }
 
+
 type UsersAPIComponentPropsType = {
     users: Array<UserType>
     follow: (userId: number) => void
@@ -24,29 +26,33 @@ type UsersAPIComponentPropsType = {
     totalUsersCount: number
     pageSize: number
     currentPage: number
-    setCurrentPage: (pageNumber: number) => void
+    setCurrentPage: (pageNumber: number)=>void
     isFetching: boolean
     followingInProgress: Array<number>
-    getUsers: (currentPage: number, pageSize: number) => void
+    getUsers: (currentPage: number, pageSize: number)=> void
 }
 
 
-class UsersContainer extends React.Component<UsersAPIComponentPropsType, {}> {
+class UsersContainer   extends React.Component<UsersAPIComponentPropsType, {}> {
+
     componentDidMount() {
+
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
+
     }
 
     onPageChanged = (pageNumber: number) => {
         this.props.getUsers(pageNumber, this.props.pageSize)
+
     }
 
     render() {
 
         return (
             <>
-                {this.props.isFetching ? <Preloader/> : null}
+                {this.props.isFetching ? <Preloader /> : null }
                 <Users
-                    totalUsersCount={this.props.totalUsersCount}
+                    totalUsersCount={ this.props.totalUsersCount}
                     pageSize={this.props.pageSize}
                     currentPage={this.props.currentPage}
                     users={this.props.users}
@@ -73,8 +79,8 @@ const mapStateToProps = (state: ReducerType): MapStatePropsType => {
     }
 }
 
-export default withAuthRedirect(connect(mapStateToProps, {
-    follow, unFollow,
-    setCurrentPage,
-    getUsers
-})(UsersContainer))
+export default compose<React.ComponentType>(withAuthRedirect,
+    connect(mapStateToProps, {
+        follow, unFollow,
+        setCurrentPage,
+        getUsers}))(UsersContainer)
