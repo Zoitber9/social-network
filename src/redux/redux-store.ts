@@ -1,6 +1,6 @@
 import {applyMiddleware, combineReducers, createStore} from 'redux';
 import profileReducer, {
-    addPostACType, setUsersProfileType,
+    addPostACType, SetStatusType, setUsersProfileType,
     updateNewPostTextACType
 } from './profile-reducer';
 import dialogReducer, {
@@ -40,6 +40,7 @@ export type ActionType =
     | setUsersProfileType
     | setUserDataACType
     | toggleIsFollowingInProgressACType
+    | SetStatusType
 
 
 let store = createStore(rootReducer, applyMiddleware(thunk))
