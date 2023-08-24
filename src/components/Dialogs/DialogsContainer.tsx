@@ -1,10 +1,11 @@
 import React from 'react';
-import {InitialStateDialogsType, sendMessageAC, updateNewMessageBodyAC} from '../../redux/dialogs-reducer';
+import {InitialStateDialogsType} from '../../redux/dialogs-reducer';
 import Dialogs from './Dialogs';
 import {connect} from "react-redux";
 import {compose, Dispatch} from "redux";
 import {ReducerType} from "../../redux/redux-store";
 import {withAuthRedirect} from "../../../src/components/hoc/WithAuthRedirect";
+import {addPostAC} from "../../redux/profile-reducer";
 
 
 type mapStateToPropsType = {
@@ -12,8 +13,7 @@ type mapStateToPropsType = {
 }
 
 type mapDispatchToPropsType = {
-    updateNewMessageBody: (text: string) => void
-    sendMessage: () => void
+    sendMessage: (newMessageBody: string) => void
 }
 
 const mapStateToProps = (state: ReducerType): mapStateToPropsType => {
@@ -23,11 +23,8 @@ const mapStateToProps = (state: ReducerType): mapStateToPropsType => {
 }
 const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
-        updateNewMessageBody: (text: string) => {
-            dispatch(updateNewMessageBodyAC(text))
-        },
-        sendMessage: () => {
-            dispatch(sendMessageAC())
+        sendMessage: (newMessageBody: string) => {
+            dispatch(addPostAC(newMessageBody))
         }
     }
 }

@@ -1,8 +1,7 @@
 import {ActionType} from './redux-store';
 
 export type InitialStateDialogsType = typeof initialState
-export type sendMessageACType = ReturnType<typeof sendMessageAC>
-export type updateNewMessageBodyACType = ReturnType<typeof updateNewMessageBodyAC>
+export type sendMessageACType = ReturnType<typeof addMessageActionCreator>
 
 let initialState = {
     dialogs: [
@@ -17,8 +16,7 @@ let initialState = {
         {id: 1, message: 'Hi'},
         {id: 2, message: 'How are you?'},
         {id: 3, message: 'Im fain'},
-    ],
-    newMessageBody: ''
+    ]
 }
 
 const dialogReducer = (state: InitialStateDialogsType = initialState,
@@ -27,27 +25,14 @@ const dialogReducer = (state: InitialStateDialogsType = initialState,
         case 'SEND-MESSAGE':
             let newMessage = {
                 id: 1,
-                message: state.newMessageBody
+                message: action.newMessageBody
             }
-            return {
-                ...state,
-                messages: [...state.messages, newMessage],
-                newMessageBody: ''
-            };
-        case 'UPDATE-NEW-MESSAGE-BODY':
-            return {...state, newMessageBody: action.newMessage};
+            return {...state, messages: [...state.messages, newMessage]};
 
         default:
             return state;
     }
 }
-
-export let sendMessageAC = () => ({type: 'SEND-MESSAGE'} as const)
-export let updateNewMessageBodyAC = (text: string) => {
-    return {
-        type: 'UPDATE-NEW-MESSAGE-BODY',
-        newMessage: text
-    } as const
-}
+export let addMessageActionCreator = (newMessageBody: string) => ({type: 'SEND-MESSAGE', newMessageBody} as const)
 
 export default dialogReducer
