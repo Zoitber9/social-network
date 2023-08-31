@@ -1,24 +1,24 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import s from './Dialogs.module.css'
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Messages/Message';
-import {InitialStateDialogsType} from "../../redux/dialogs-reducer";
-import {Field, InjectedFormProps, reduxForm} from 'redux-form';
-
+import {InitialStateDialogsType} from '../../redux/dialogs-reducer';
+import {AddMessageFormRedux} from '../../components/Dialogs/AddMessageForm/AddMessageForm';
 
 type DialogsMessagesPropsType = {
     sendMessage: (newMessageBody: string) => void
     dialogsPage: InitialStateDialogsType
-    isAuth: boolean
+
 }
 
 const Dialogs = (props: DialogsMessagesPropsType) => {
-    let dialogsElement = props.dialogsPage.dialogs.map((i) => {
 
+    let dialogsElement = props.dialogsPage.dialogs.map((i) => {
         return (
             <DialogItem key={i.id} name={i.name} id={i.id}/>
         )
     })
+
     let messagesElement = props.dialogsPage.messages.map((i) => {
 
         return (
@@ -26,46 +26,20 @@ const Dialogs = (props: DialogsMessagesPropsType) => {
         )
     })
 
-    // const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    //     let text: string = e.currentTarget.value
-    //     props.updateNewMessageBody(text)
-    // }
     let addNewMessage = (values: any) => {
         props.sendMessage(values.newMessageBody)
     }
 
     return (
-        <div className={s.dialogs}>
+        <div className={s.dialogs + ' ' + s.active}>
             <div className={s.dialogsItem}>
                 {dialogsElement}
             </div>
             <div className={s.messages}>
-                <div>
-                    {messagesElement}
-                </div>
-                <AddMessageFormRedux onSubmit={addNewMessage}/>
+                {messagesElement}
             </div>
+            <AddMessageFormRedux onSubmit={addNewMessage}/>
         </div>
     )
 }
 export default Dialogs
-
-type FormDataType = {
-    newMessageBody: string
-}
-
-const AddMessageForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
-
-    return (
-        <form onSubmit={props.handleSubmit}>
-            <Field
-                component='textarea'
-                name='newMessageBody'
-                placeholder={'Enter your message'}
-            />
-            <button>Add post</button>
-        </form>
-
-    )
-}
-const AddMessageFormRedux = reduxForm<FormDataType>({form: 'dialogAddMessageForm'})(AddMessageForm)

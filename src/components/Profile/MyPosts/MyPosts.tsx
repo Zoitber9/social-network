@@ -3,6 +3,8 @@ import s from './MyPosts.module.css'
 import Post from "./Post/Post";
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 import {InitialStateProfileType} from '../../../redux/profile-reducer';
+import {maxLengthCreator, required} from "../../../utils/validator";
+import {Textarea} from "../../../common/FormControls/FormControls";
  
 export type PostsPropsType = {
     profilePage: InitialStateProfileType
@@ -38,13 +40,16 @@ type FormDataType = {
     newMessageBody: string
 }
 
+const maxLength10 = maxLengthCreator(10)
 const AddNewPostForm: React.FC<InjectedFormProps<FormDataType>> = (props)=> {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
                 <Field
-                    component='textarea'
+                    component={Textarea}
                     name='newPostText'
+                    validate={[required,maxLength10 ]}
+                    placeholder={'Post message'}
                 />
             </div>
             <div>
