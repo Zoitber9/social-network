@@ -2,20 +2,32 @@ import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 import {Input} from "../../common/FormControls/FormControls";
 import {required} from "../../utils/validator";
+import {useSelector} from "react-redux";
+import {login} from '../../redux/auth-reducer';
+import {Redirect} from "react-router-dom";
+import {ReducerType,StoreType, useAppDispatch} from "../../redux/redux-store";
 
 type FormDataType = {
-    login: string
+    email: string
     password: string
     rememberMe: boolean
 }
 
 
 const Login = () => {
-
-    const onSubmit = (formData: FormDataType)=> {
-        console.log(formData)
+    let isAuth = useSelector<ReducerType, boolean>(state => state.auth.isAuth)
+    // const [isAuthLog, setisAuthLog] = useState(isAuth)
+    console.log(isAuth)
+    const dispatch = useAppDispatch()
+    const onSubmit = (formData: FormDataType) => {
+        let {email, password, rememberMe} = formData
+        dispatch(login(email, password, rememberMe))
     }
+    if(isAuth)return <Redirect to={"/profile"}/>
 
+// useEffect(()=> {
+//     setisAuthLog(isAuth)
+// }, [isAuth])
     return (
         <div>
             <h1>Login</h1>
@@ -29,17 +41,17 @@ export default Login;
 
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
-        <form action="" onSubmit={props.handleSubmit}>
+        <form onSubmit={props.handleSubmit}>
             <Field component={Input}
                    validate={[required]}
-                   name={'login'} placeholder={'login'}/>
+                   name="email" placeholder={'email'}/>
             <Field component={Input}
                    validate={[required]}
-                   name={'password'} placeholder={'password'}/>
+                   name="password" placeholder={'password'}
+                   type="password"/>
             <Field component={Input}
-                   name={'rememberMe'} type="checkbox" /> remember Me
-            <button>Login</button>
-
+                   name="rememberMe" type="checkbox"/> remember Me
+            <button> Login</button>
         </form>
 
     );

@@ -33,7 +33,7 @@ export const Input = (props: any) => {
     return (
         <>
             <FormControl {...props}>
-                <Input {...input}{...props}/>
+                <input {...input}{...props}/>
             </FormControl>
         </>
 
