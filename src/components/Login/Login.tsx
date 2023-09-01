@@ -6,11 +6,13 @@ import {useSelector} from "react-redux";
 import {login} from '../../redux/auth-reducer';
 import {Redirect} from "react-router-dom";
 import {ReducerType,StoreType, useAppDispatch} from "../../redux/redux-store";
+import s from './login.module.css'
 
 type FormDataType = {
     email: string
     password: string
     rememberMe: boolean
+    error: string
 }
 
 
@@ -51,6 +53,9 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                    type="password"/>
             <Field component={Input}
                    name="rememberMe" type="checkbox"/> remember Me
+            {props.error && <div className={s.formSummeryError}>
+                {props.error}
+            </div>}
             <button> Login</button>
         </form>
 

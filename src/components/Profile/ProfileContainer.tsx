@@ -5,6 +5,7 @@ import {ReducerType} from '../../redux/redux-store';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {getStatus, getUsersProfile, ProfileType, updateStatus} from '../../redux/profile-reducer';
 import {compose} from "redux";
+import {withAuthRedirect} from "../hoc/WithAuthRedirect";
 
 
 type PathParamsType = {
@@ -17,6 +18,8 @@ type ProfileContainerType = MapStateToPropsType & MapDispatchToPropsType
 type MapStateToPropsType = {
     profile: ProfileType | null
     status: string
+    authorizedUserID: number | null
+    isAuth: boolean
 
 }
 
@@ -31,7 +34,7 @@ class ProfileContainer extends React.Component<PropsType> {
     componentDidMount() {
         let userId = this.props.match.params.userId
         if (!userId) {
-            userId = '27692'
+            userId = String(this.props.authorizedUserID)
         }
         this.props.getUsersProfile(+userId)
         this.props.getStatus(+userId)
@@ -50,7 +53,9 @@ class ProfileContainer extends React.Component<PropsType> {
 
 let mapStateToProps = (state: ReducerType): MapStateToPropsType => ({
     profile: state.profilePage.profile,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    authorizedUserID: state.auth.id,
+    isAuth: state.auth.isAuth,
 
 })
 
@@ -61,4 +66,5 @@ export default compose<React.ComponentType>(
         updateStatus
     }),
     withRouter,
+    withAuthRedirect,
 )(ProfileContainer)
