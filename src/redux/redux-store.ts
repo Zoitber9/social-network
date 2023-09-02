@@ -15,6 +15,7 @@ import usersReducer, {
 import authReducer, {setUserDataACType} from "./auth-reducer";
 import thunk, {ThunkDispatch} from 'redux-thunk';
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
+import appReducer, {InitializedSuccessACType} from "../redux/app-reducer";
 
 let rootReducer = combineReducers({
     profilePage: profileReducer,
@@ -22,6 +23,7 @@ let rootReducer = combineReducers({
     sidebar: sidebarReducer,
     usersPage: usersReducer,
     auth: authReducer,
+    app: appReducer,
 })
 
 export type ActionType =
@@ -37,6 +39,7 @@ export type ActionType =
     | setUserDataACType
     | toggleIsFollowingInProgressACType
     | SetStatusType
+    | InitializedSuccessACType
 
 
 let store = createStore(rootReducer, applyMiddleware(thunk))
@@ -46,4 +49,5 @@ export const useAppSelector: TypedUseSelectorHook<AppRootStateType> = useSelecto
 export type ReducerType = ReturnType<typeof rootReducer>
 export type ThunkDispatchType = ThunkDispatch<StoreType, any, AnyAction>
 export const useAppDispatch = ()=> useDispatch<ThunkDispatchType>()
+
 export default store
