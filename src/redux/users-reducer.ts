@@ -81,7 +81,7 @@ const usersReducer = (state: InitialStateUsersType = initialState, action: Actio
     }
 }
 
-export const followSuccess = (userId: number)=> ({type: 'FOLLOW', userId} as const)
+export const followSuccess = (userId: number) => ({type: 'FOLLOW', userId} as const)
 export const unFollowSuccess = (userId: number) => ({
     type: 'UNFOLLOW',
     userId
@@ -109,21 +109,22 @@ export const toggleIsFollowingInProgress = (userId: number, isFetching: boolean)
     isFetching
 } as const)
 
-export const getUsers = (currentPage:number, pageSize: number) => (dispatch: Dispatch) => {
+export const requestUsers = (page: number, pageSize: number) => (dispatch: Dispatch) => {
     dispatch(toggleIsFetching(true))
-    usersAPI.getUsers(currentPage, pageSize)
+    dispatch(setCurrentPage(page))
+    usersAPI.getUsers(page, pageSize)
         .then(data => {
             dispatch(toggleIsFetching(false))
             dispatch(setUsers(data.items))
             dispatch(setTotalUsersCount(data.totalCount))
         })
 }
-export const follow =(userId: number) => {
+export const follow = (userId: number) => {
     console.log('fol')
     return (dispatch: Dispatch) => {
         dispatch(toggleIsFollowingInProgress(userId, true))
         usersAPI.follow(userId).then(data => {
-            if(data.resultCode === 0) {
+            if (data.resultCode === 0) {
                 dispatch(followSuccess(userId))
             }
             dispatch(toggleIsFollowingInProgress(userId, false))
@@ -131,12 +132,12 @@ export const follow =(userId: number) => {
     }
 }
 
-export const unFollow =(userId: number) => {
+export const unFollow = (userId: number) => {
     console.log('unf')
     return (dispatch: Dispatch) => {
         dispatch(toggleIsFollowingInProgress(userId, true))
         usersAPI.unfollow(userId).then(data => {
-            if(data.resultCode === 0) {
+            if (data.resultCode === 0) {
                 dispatch(unFollowSuccess(userId))
             }
             dispatch(toggleIsFollowingInProgress(userId, false))
