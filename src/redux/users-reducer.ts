@@ -120,7 +120,6 @@ export const requestUsers = (page: number, pageSize: number) => (dispatch: Dispa
         })
 }
 export const follow = (userId: number) => {
-    console.log('fol')
     return (dispatch: Dispatch) => {
         dispatch(toggleIsFollowingInProgress(userId, true))
         usersAPI.follow(userId).then(data => {
@@ -133,7 +132,6 @@ export const follow = (userId: number) => {
 }
 
 export const unFollow = (userId: number) => {
-    console.log('unf')
     return (dispatch: Dispatch) => {
         dispatch(toggleIsFollowingInProgress(userId, true))
         usersAPI.unfollow(userId).then(data => {
