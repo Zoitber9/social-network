@@ -1,6 +1,6 @@
 import {AnyAction, applyMiddleware, combineReducers, createStore} from 'redux';
 import profileReducer, {
-    addPostACType, SetStatusType, setUsersProfileType,
+    addPostACType, DeletePostType, SetStatusType, setUsersProfileType,
 
 } from './profile-reducer';
 import dialogReducer, {sendMessageACType,} from './dialogs-reducer';
@@ -40,6 +40,7 @@ export type ActionType =
     | toggleIsFollowingInProgressACType
     | SetStatusType
     | InitializedSuccessACType
+    | DeletePostType
 
 
 let store = createStore(rootReducer, applyMiddleware(thunk))
@@ -48,6 +49,6 @@ export type StoreType = typeof store
 export const useAppSelector: TypedUseSelectorHook<AppRootStateType> = useSelector;
 export type ReducerType = ReturnType<typeof rootReducer>
 export type ThunkDispatchType = ThunkDispatch<StoreType, any, AnyAction>
-export const useAppDispatch = ()=> useDispatch<ThunkDispatchType>()
+export const useAppDispatch = () => useDispatch<ThunkDispatchType>()
 
 export default store

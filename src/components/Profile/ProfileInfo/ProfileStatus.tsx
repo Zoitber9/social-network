@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React, {ChangeEvent, useCallback, useEffect, useState} from 'react';
 
 type ProfileStatusPropsType = {
     status: string
@@ -7,7 +7,6 @@ type ProfileStatusPropsType = {
 
 
 const ProfileStatus: React.FC<ProfileStatusPropsType> = ({status, updateStatus}) => {
-    console.log('ProfileStatus')
     const [editMode, setEditMode] = useState(false)
     const [valueInput, setValueInput] = useState('')
 
@@ -15,14 +14,13 @@ const ProfileStatus: React.FC<ProfileStatusPropsType> = ({status, updateStatus})
         setValueInput(status)
     }, [status])
 
-    const activateEditMode = () => {
+    const activateEditMode = useCallback (() => {
         setEditMode(!editMode)
-    }
-    const deactivateEditMode = () => {
+    },[editMode])
+    const deactivateEditMode =useCallback(() => {
         updateStatus(valueInput)
         setEditMode(!editMode)
-
-    }
+    },[editMode,valueInput])
     const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
         setValueInput(e.currentTarget.value)
 
