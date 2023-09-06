@@ -1,0 +1,7 @@
+.selectedPage {
+    font-weight: bold;
+    cursor: pointer;
+}
+.numberPage {
+    cursor: pointer;
+}

@@ -16,7 +16,6 @@ import {initializeApp} from '../src/redux/app-reducer';
 const App = () => {
     const dispatch = useDispatch()
     const initialized = useSelector<AppRootStateType, boolean>(state => state.app.initialized)
-    console.log(initialized)
     useEffect(() => {
         dispatch(initializeApp())
     }, [])

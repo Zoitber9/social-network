@@ -3,6 +3,8 @@ import s from './ProfileInfo.module.css'
 import Preloader from "../../../common/preloader/preloader";
 import ProfileStatus from "./ProfileStatus";
 import {ProfileType} from "../../../redux/profile-reducer";
+import ava from '../../../assets/images/userPhoto.png'
+
 
 
 type ProfileInfoType = {
@@ -11,21 +13,19 @@ type ProfileInfoType = {
     updateStatus: (status: string) => void
 }
 
-
-const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
-    if (!props.profile) {
+const ProfileInfo: React.FC<ProfileInfoType> = ({profile,status, updateStatus}) => {
+    if(!profile) {
         return <Preloader/>
     }
-
     return (
         <div>
-            {/*<div><img*/}
-            {/*    src={"https://pibig.info/uploads/posts/2022-08/thumbs/1659391395_51-pibig-info-p-krasivii-gradientnii-fon-krasivo-51.jpg"}*/}
-            {/*    alt={'photo'}/>*/}
-            {/*</div>*/}
             <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.small} alt=""/>
-              <ProfileStatus  status={props.status} updateStatus={props.updateStatus}/>
+                <img className={s.content_image_photo} src={profile.photos.small || ava} alt="avatar"/>
+                <ProfileStatus
+                    status={status}
+                    updateStatus={updateStatus}
+                />
+                ava + description
             </div>
         </div>
     )
