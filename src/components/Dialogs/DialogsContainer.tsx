@@ -4,7 +4,7 @@ import Dialogs from './Dialogs';
 import {connect} from "react-redux";
 import {compose, Dispatch} from "redux";
 import {ReducerType} from "../../redux/redux-store";
-import {withAuthRedirect} from "../../../src/components/hoc/WithAuthRedirect";
+import {withAuthRedirect} from "../../hoc/WithAuthRedirect";
 import {addPostAC} from "../../redux/profile-reducer";
 
 
