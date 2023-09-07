@@ -1,5 +1,5 @@
 import React, {ComponentType, Suspense} from 'react';
-import Preloader from 'src/common/preloader/preloader';
+import Preloader from '../common/preloader/preloader';
 
 
 

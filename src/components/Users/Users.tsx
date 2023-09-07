@@ -1,5 +1,4 @@
 import React from 'react';
-import s from './users.module.css';
 import {UserType} from "../../redux/users-reducer";
 import Paginator from "../../common/paginator/paginator";
 import User from "../../components/Users/User";
@@ -16,7 +15,7 @@ type UsersPropsType = {
 }
 
 const Users: React.FC<UsersPropsType> = (props) => {
-    let {currentPage, onPageChanged, totalUsersCount, pageSize, ...rest} = props
+    let {currentPage, onPageChanged, totalUsersCount, pageSize} = props
     return (
         <div>
             <Paginator

@@ -22,7 +22,6 @@ const Paginator: React.FC<PaginatorPropsType> = (props) => {
     const [portionNumber, setPortionNumber] = useState(1)
     let leftPortionPageNumber = (portionNumber - 1) * portionSize + 1
     let rightPortionPageNumber = portionNumber * portionSize
-    console.log(portionNumber)
 
     return (
         <div>

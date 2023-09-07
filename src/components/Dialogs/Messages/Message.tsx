@@ -1,7 +1,4 @@
 import React from "react";
-import s from "../Dialogs.module.css"
-
-
 
 export type MessagePropsType = {
     id: number
@@ -13,6 +10,5 @@ const Message = (props:MessagePropsType)=> {
         <div  key={props.id}>{props.message}</div>
     )
 }
-
 
 export  default Message
