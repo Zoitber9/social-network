@@ -27,11 +27,11 @@ type MapDispatchToPropsType = {
     getUsersProfile: (userId: number) => void
     getStatus: (userId: number) => void
     updateStatus: (status: string) => void
+    savePhoto: (photo: FileList | null) => void
 }
 
 class ProfileContainer extends React.Component<PropsType> {
-
-    componentDidMount() {
+    refreshProfile() {
         let userId = this.props.match.params.userId
         if (!userId) {
             userId = String(this.props.authorizedUserID)
@@ -43,12 +43,24 @@ class ProfileContainer extends React.Component<PropsType> {
         this.props.getStatus(+userId)
     }
 
+    componentDidMount() {
+        this.refreshProfile()
+    }
+
+    componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>, snapshot?: any) {
+        if (prevProps.match.params.userId !== this.props.match.params.userId) {
+            this.refreshProfile()
+        }
+    }
+
     render() {
         return (
             <Profile
+                isOwner={!this.props.match.params.userId}
                 profile={this.props.profile}
                 status={this.props.status}
                 updateStatus={this.props.updateStatus}
+                savePhoto={this.props.savePhoto}
             />
         )
     }

@@ -1,6 +1,6 @@
 import {AnyAction, applyMiddleware, combineReducers, createStore} from 'redux';
 import profileReducer, {
-    addPostACType, DeletePostType, SetStatusType, setUsersProfileType,
+    addPostACType, DeletePostType, SavePhotoSuccessType, SetStatusType, setUsersProfileType,
 
 } from './profile-reducer';
 import dialogReducer, {sendMessageACType,} from './dialogs-reducer';
@@ -41,6 +41,7 @@ export type ActionType =
     | SetStatusType
     | InitializedSuccessACType
     | DeletePostType
+    | SavePhotoSuccessType
 
 
 let store = createStore(rootReducer, applyMiddleware(thunk))

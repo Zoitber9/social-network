@@ -70,6 +70,17 @@ const profileReducer = (state: InitialStateProfileType = initialState, action: A
         case 'DELETE_POST': {
             return {...state, posts: state.posts.filter(p => p.id !== action.postId)};
         }
+        case 'SAVE_PHOTO_SUCCESS': {
+            const copyState = state
+            if (copyState.profile) {
+                copyState.profile.photos = action.photos
+            }
+            // return {
+            //     ...state,
+            //     profile: {...state.profile, photos: action.photos}
+            // };
+            return copyState
+        }
         default:
             return state;
     }
@@ -89,12 +100,27 @@ export let setStatus = (status: string) => ({
     type: 'SET_STATUS',
     status
 } as const)
+
 export let deletePost = (postId: number) => ({
     type: 'DELETE_POST',
     postId
 } as const)
 
+export let savePhotoSuccess = (photos: PhotosType) => ({
+    type: 'SAVE_PHOTO_SUCCESS',
+    photos
+} as const)
+
 export type DeletePostType = ReturnType<typeof deletePost>
+export type SavePhotoSuccessType = ReturnType<typeof savePhotoSuccess>
+
+
+export let savePhoto = (file: FileList | null) => async (dispatch: Dispatch) => {
+    let response = await profileAPI.savePhoto(file)
+    if (response.data.resultCode === 0) {
+        dispatch(savePhotoSuccess(response.data.photos))
+    }
+}
 
 
 export let getUsersProfile = (userId: number) => async (dispatch: Dispatch) => {
