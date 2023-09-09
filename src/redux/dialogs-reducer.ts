@@ -33,6 +33,7 @@ const dialogReducer = (state: InitialStateDialogsType = initialState,
             return state;
     }
 }
+
 export let addMessageActionCreator = (newMessageBody: string) => ({type: 'SEND-MESSAGE', newMessageBody} as const)
 
 export default dialogReducer

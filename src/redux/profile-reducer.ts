@@ -18,6 +18,7 @@ export type InitialStateProfileType = {
     profile: null | ProfileType
     status: string
 }
+
 export type ContactsType = {
     facebook: string
     website: null | string
@@ -28,6 +29,7 @@ export type ContactsType = {
     github: string
     mainLink: null | string
 }
+
 type PhotosType = {
     small: string
     large: string
@@ -51,7 +53,6 @@ let initialState = {
     ],
     profile: null,
     status: ''
-
 }
 
 const profileReducer = (state: InitialStateProfileType = initialState, action: ActionType): InitialStateProfileType => {
@@ -130,7 +131,6 @@ export let saveProfile = (formData: ProfileFormDataType) => async (dispatch: Dis
         dispatch(savePhotoSuccess(response.data.photos))
     }
 }
-
 
 export let getUsersProfile = (userId: number) => async (dispatch: Dispatch) => {
     const response = await profileAPI.getProfile(userId)

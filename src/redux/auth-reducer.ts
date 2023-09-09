@@ -10,7 +10,6 @@ export type InitialStateAuthType = {
     isAuth: boolean
 }
 
-
 let initialState: InitialStateAuthType = {
     id: null,
     email: null,
@@ -25,8 +24,6 @@ const authReducer = (state = initialState, action: ActionType): InitialStateAuth
                 ...state,
                 ...action.payload,
             }
-
-
         default:
             return state;
     }

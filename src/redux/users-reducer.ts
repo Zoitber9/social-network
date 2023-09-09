@@ -32,7 +32,6 @@ export type UserType = {
     followed: boolean
 }
 
-
 let initialState = {
     users: [],
     pageSize: 5,
@@ -81,7 +80,6 @@ export const unFollowSuccess = (userId: number) => ({
     type: 'UNFOLLOW',
     userId
 } as const)
-
 export const setUsers = (users: Array<UserType>) => ({
     type: 'SET-USERS',
     users
@@ -113,7 +111,7 @@ export const requestUsers = (page: number, pageSize: number) => async (dispatch:
     dispatch(setTotalUsersCount(data.totalCount))
 }
 
-const followUnfollowFlow = async (dispatch: Dispatch, userId: number, apiMethod: any, actionCreator: (userId: number)=> ActionType) => {
+const followUnfollowFlow = async (dispatch: Dispatch, userId: number, apiMethod: any, actionCreator: (userId: number) => ActionType) => {
     dispatch(toggleIsFollowingInProgress(userId, true))
     let response = await apiMethod(userId)
     if (response.resultCode === 0) {
@@ -124,12 +122,12 @@ const followUnfollowFlow = async (dispatch: Dispatch, userId: number, apiMethod:
 
 
 export const follow = (userId: number) => async (dispatch: Dispatch) => {
-    followUnfollowFlow(dispatch, userId, usersAPI.follow.bind(usersAPI), followSuccess)
+  await  followUnfollowFlow(dispatch, userId, usersAPI.follow.bind(usersAPI), followSuccess)
 
 }
 
 export const unFollow = (userId: number) => async (dispatch: Dispatch) => {
-    followUnfollowFlow(dispatch, userId, usersAPI.unfollow.bind(usersAPI), unFollowSuccess)
+  await  followUnfollowFlow(dispatch, userId, usersAPI.unfollow.bind(usersAPI), unFollowSuccess)
 }
 
 

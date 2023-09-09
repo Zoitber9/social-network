@@ -5,7 +5,6 @@ type ProfileStatusPropsType = {
     updateStatus: (status: string) => void
 }
 
-
 const ProfileStatus: React.FC<ProfileStatusPropsType> = ({status, updateStatus}) => {
     const [editMode, setEditMode] = useState(false)
     const [valueInput, setValueInput] = useState('')
@@ -14,22 +13,19 @@ const ProfileStatus: React.FC<ProfileStatusPropsType> = ({status, updateStatus})
         setValueInput(status)
     }, [status])
 
-    const activateEditMode = useCallback (() => {
+    const activateEditMode = useCallback(() => {
         setEditMode(!editMode)
-    },[editMode])
-    const deactivateEditMode =useCallback(() => {
+    }, [editMode])
+    const deactivateEditMode = useCallback(() => {
         updateStatus(valueInput)
         setEditMode(!editMode)
-    },[editMode,valueInput])
+    }, [editMode, valueInput])
     const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
         setValueInput(e.currentTarget.value)
-
     }
-
 
     return (
         <div>
-
             {!editMode ?
                 <div>
                     <b>Status</b>: <span onDoubleClick={activateEditMode}>{valueInput || 'Установить статус'}</span>
@@ -40,9 +36,7 @@ const ProfileStatus: React.FC<ProfileStatusPropsType> = ({status, updateStatus})
                            autoFocus={true}/>
                 </div>
             }
-
         </div>
-
     );
 };
 
