@@ -29,9 +29,10 @@ const ProfileStatus: React.FC<ProfileStatusPropsType> = ({status, updateStatus})
 
     return (
         <div>
+
             {!editMode ?
                 <div>
-                    <span onDoubleClick={activateEditMode}>{valueInput || 'Установить статус'}</span>
+                    <b>Status</b>: <span onDoubleClick={activateEditMode}>{valueInput || 'Установить статус'}</span>
                 </div>
                 :
                 <div>

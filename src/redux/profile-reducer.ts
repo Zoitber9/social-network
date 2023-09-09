@@ -17,7 +17,7 @@ export type InitialStateProfileType = {
     profile: null | ProfileType
     status: string
 }
-type ContactsType = {
+export type ContactsType = {
     facebook: string
     website: null | string
     vk: string
@@ -75,10 +75,6 @@ const profileReducer = (state: InitialStateProfileType = initialState, action: A
             if (copyState.profile) {
                 copyState.profile.photos = action.photos
             }
-            // return {
-            //     ...state,
-            //     profile: {...state.profile, photos: action.photos}
-            // };
             return copyState
         }
         default:
