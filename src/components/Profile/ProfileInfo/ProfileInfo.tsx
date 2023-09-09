@@ -4,6 +4,8 @@ import Preloader from "../../../common/preloader/preloader";
 import ProfileStatus from "./ProfileStatus";
 import {ContactsType, ProfileType} from "../../../redux/profile-reducer";
 import ava from '../../../assets/images/userPhoto.png'
+import {ProfileDataFormReduxForm, ProfileFormDataType} from "../ProfileInfo/ProfileDataForm";
+import {useAppDispatch} from "../../../redux/redux-store";
 
 type ProfileInfoType = {
     profile: ProfileType | null
@@ -11,10 +13,12 @@ type ProfileInfoType = {
     updateStatus: (status: string) => void
     isOwner: boolean
     savePhoto: (photo: FileList | null) => void
+    saveProfile: (formData: ProfileFormDataType)=> void
 }
 
-const ProfileInfo: React.FC<ProfileInfoType> = ({profile, status, updateStatus, isOwner, savePhoto}) => {
+const ProfileInfo: React.FC<ProfileInfoType> = ({profile, status, updateStatus, isOwner, savePhoto,saveProfile}) => {
     const [editMode, setEditMode] = useState<boolean>(false)
+    const dispatch = useAppDispatch()
 
     if (!profile) {
         return <Preloader/>
@@ -25,17 +29,21 @@ const ProfileInfo: React.FC<ProfileInfoType> = ({profile, status, updateStatus, 
             savePhoto(e.target.files)
         }
     }
+
+    const onSubmit = (formData: ProfileFormDataType) => {
+        // let { fullName, lookingForAJob, lookingForAJobDescription, aboutMe} = formData
+        // console.log(formData)
+        saveProfile(formData)
+    }
     return (
         <div>
             <div className={s.descriptionBlock}>
                 <img className={s.content_image_photo} src={profile.photos.small || ava} alt="avatar"/>
                 {isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
                 {editMode ?
-                    <ProfileDataForm profile={profile}/>
+                    <ProfileDataFormReduxForm onSubmit={onSubmit}/>
                     :
-                    <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => {
-                        setEditMode(true)
-                    }}/>
+                    <ProfileData profile={profile} isOwner={true} goToEditMode={ ()=> {setEditMode(true)}}/>
                 }
                 <ProfileStatus
                     status={status}

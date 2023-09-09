@@ -47,6 +47,7 @@ export const createField = (component: (props: any) => JSX.Element,
                    validate={validate}
                    name={name}
                    placeholder={placeholder}
+                   value={''}
                    {...props}
             /> {text}
         </div>

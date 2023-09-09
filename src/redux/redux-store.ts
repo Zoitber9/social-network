@@ -3,6 +3,7 @@ import profileReducer, {
     addPostACType, DeletePostType, SavePhotoSuccessType, SetStatusType, setUsersProfileType,
 
 } from './profile-reducer';
+import {reducer as formReducer} from 'redux-form'
 import dialogReducer, {sendMessageACType,} from './dialogs-reducer';
 import sidebarReducer from './sidebar-reducer';
 import usersReducer, {
@@ -22,8 +23,10 @@ let rootReducer = combineReducers({
     messagesPage: dialogReducer,
     sidebar: sidebarReducer,
     usersPage: usersReducer,
+    form: formReducer,
     auth: authReducer,
     app: appReducer,
+    editProfile: formReducer,
 })
 
 export type ActionType =

@@ -1,6 +1,7 @@
 import {ActionType} from './redux-store';
 import {Dispatch} from "redux";
 import {profileAPI} from "../api/api";
+import {ProfileFormDataType} from "../components/Profile/ProfileInfo/ProfileDataForm";
 
 export type addPostACType = ReturnType<typeof addPostAC>
 export type setUsersProfileType = ReturnType<typeof setUsersProfile>
@@ -75,6 +76,7 @@ const profileReducer = (state: InitialStateProfileType = initialState, action: A
             if (copyState.profile) {
                 copyState.profile.photos = action.photos
             }
+
             return copyState
         }
         default:
@@ -106,6 +108,10 @@ export let savePhotoSuccess = (photos: PhotosType) => ({
     type: 'SAVE_PHOTO_SUCCESS',
     photos
 } as const)
+export let saveProfileSuccess = (formData: ProfileFormDataType) => ({
+    type: 'SAVE_PROFILE_SUCCESS',
+    formData
+} as const)
 
 export type DeletePostType = ReturnType<typeof deletePost>
 export type SavePhotoSuccessType = ReturnType<typeof savePhotoSuccess>
@@ -113,6 +119,13 @@ export type SavePhotoSuccessType = ReturnType<typeof savePhotoSuccess>
 
 export let savePhoto = (file: FileList | null) => async (dispatch: Dispatch) => {
     let response = await profileAPI.savePhoto(file)
+    if (response.data.resultCode === 0) {
+        dispatch(savePhotoSuccess(response.data.photos))
+    }
+}
+
+export let saveProfile = (formData: ProfileFormDataType) => async (dispatch: Dispatch) => {
+    let response = await profileAPI.saveProfile(formData)
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.photos))
     }
