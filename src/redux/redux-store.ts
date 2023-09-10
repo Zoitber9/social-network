@@ -13,7 +13,7 @@ import usersReducer, {
     SetUserACType, toggleIsFetchingACType, toggleIsFollowingInProgressACType,
     UnFollowACType
 } from "./users-reducer";
-import authReducer, {setUserDataACType} from "./auth-reducer";
+import authReducer, {GetCaptchaUrlType, setUserDataACType} from "./auth-reducer";
 import thunk, {ThunkDispatch} from 'redux-thunk';
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import appReducer, {InitializedSuccessACType} from "../redux/app-reducer";
@@ -45,6 +45,7 @@ export type ActionType =
     | InitializedSuccessACType
     | DeletePostType
     | SavePhotoSuccessType
+    | GetCaptchaUrlType
 
 
 let store = createStore(rootReducer, applyMiddleware(thunk))
