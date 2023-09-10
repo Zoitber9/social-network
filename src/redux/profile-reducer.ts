@@ -1,49 +1,8 @@
-import {ActionType} from './redux-store';
+import {ActionType, AppRootStateType, ThunkDispatchType} from './redux-store';
 import {Dispatch} from "redux";
 import {profileAPI} from "../api/api";
 import {ProfileFormDataType} from "../components/Profile/ProfileInfo/ProfileDataForm";
-
-export type addPostACType = ReturnType<typeof addPostAC>
-export type setUsersProfileType = ReturnType<typeof setUsersProfile>
-export type SetStatusType = ReturnType<typeof setStatus>
-
-type PostsType = {
-    id: number
-    message: string
-    likesCount: number
-}
-
-export type InitialStateProfileType = {
-    posts: PostsType[]
-    profile: null | ProfileType
-    status: string
-}
-
-export type ContactsType = {
-    facebook: string
-    website: null | string
-    vk: string
-    twitter: string
-    instagram: string
-    youtube: null | string
-    github: string
-    mainLink: null | string
-}
-
-type PhotosType = {
-    small: string
-    large: string
-}
-
-export type ProfileType = {
-    aboutMe: string
-    contacts: ContactsType
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    fullName: string
-    userId: number
-    photos: PhotosType
-}
+import {stopSubmit} from "redux-form";
 
 let initialState = {
     posts: [
@@ -114,8 +73,6 @@ export let saveProfileSuccess = (formData: ProfileFormDataType) => ({
     formData
 } as const)
 
-export type DeletePostType = ReturnType<typeof deletePost>
-export type SavePhotoSuccessType = ReturnType<typeof savePhotoSuccess>
 
 
 export let savePhoto = (file: FileList | null) => async (dispatch: Dispatch) => {
@@ -125,10 +82,16 @@ export let savePhoto = (file: FileList | null) => async (dispatch: Dispatch) => 
     }
 }
 
-export let saveProfile = (formData: ProfileFormDataType) => async (dispatch: Dispatch) => {
+export let saveProfile = (formData: ProfileFormDataType) => async (dispatch: ThunkDispatchType, getState: () => AppRootStateType) => {
+    const userId = getState().auth.id
     let response = await profileAPI.saveProfile(formData)
     if (response.data.resultCode === 0) {
-        dispatch(savePhotoSuccess(response.data.photos))
+        if (userId) {
+            dispatch(getUsersProfile(+userId))
+        }
+    } else {
+        dispatch(stopSubmit('edit-profile',{error: response.data.messages[0]}))
+        return Promise.reject(response.data.messages[0])
     }
 }
 
@@ -148,4 +111,49 @@ export let updateStatus = (status: string) => async (dispatch: Dispatch) => {
 }
 
 
+export type addPostACType = ReturnType<typeof addPostAC>
+export type setUsersProfileType = ReturnType<typeof setUsersProfile>
+export type SetStatusType = ReturnType<typeof setStatus>
+
 export default profileReducer
+
+//types
+
+type PostsType = {
+    id: number
+    message: string
+    likesCount: number
+}
+
+export type InitialStateProfileType = {
+    posts: PostsType[]
+    profile: null | ProfileType
+    status: string
+}
+
+export type ContactsKeysType = 'facebook' |
+    'website' |
+    'vk' |
+    'twitter' |
+    'instagram' |
+    'youtube' |
+    'github' |
+    'mainLink'
+
+type PhotosType = {
+    small: string
+    large: string
+}
+
+export type ProfileType = {
+    aboutMe: string
+    contacts: Record<ContactsKeysType, null | string>
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    userId: number
+    photos: PhotosType
+}
+
+export type DeletePostType = ReturnType<typeof deletePost>
+export type SavePhotoSuccessType = ReturnType<typeof savePhotoSuccess>

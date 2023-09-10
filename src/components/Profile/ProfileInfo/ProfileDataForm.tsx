@@ -5,6 +5,7 @@ import {createField, Input, Textarea} from './../../../common/FormControls/FormC
 import {InjectedFormProps, reduxForm} from 'redux-form';
 import {useSelector} from 'react-redux';
 import {AppRootStateType} from '../../../redux/redux-store';
+import s from './ProfileDataForm.module.css'
 
 
 export type ProfileFormDataType = {
@@ -34,6 +35,14 @@ const ProfileDataForm: React.FC<InjectedFormProps<ProfileFormDataType>> = ({hand
                 {createField(Textarea, [required], 'aboutMe', 'About me',)}
             </div>
             <div>
+                <b>Contacts</b>: {Object.keys(profile!.contacts).map((key, ind) => {
+                console.log(key)
+                return (
+                    <div className={s.contact}>
+                        <b>{key}: {createField(Input, [required], 'contacts.' + key, 'Full name', {type: 'text'})}</b>
+                    </div>
+                )
+            })}
             </div>
         </form>
     )
