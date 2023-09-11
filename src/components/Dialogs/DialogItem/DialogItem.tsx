@@ -8,7 +8,7 @@ export type DialogItemPropsType = {
 }
 
 const DialogItem: React.FC<DialogItemPropsType> = (props) => {
-    return(
+    return (
         <div className={s.dialog}>
             <NavLink to={"/dialogs/" + props.id}>{props.name}</NavLink>
         </div>
@@ -16,4 +16,4 @@ const DialogItem: React.FC<DialogItemPropsType> = (props) => {
 }
 
 
-export  default DialogItem
+export default DialogItem

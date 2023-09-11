@@ -15,30 +15,6 @@ import {compose} from "redux";
 import {withAuthRedirect} from "../../hoc/WithAuthRedirect";
 import {ProfileFormDataType} from "../Profile/ProfileInfo/ProfileDataForm";
 
-
-type PathParamsType = {
-    userId: string | undefined
-}
-type PropsType = RouteComponentProps<PathParamsType> & ProfileContainerType
-
-type ProfileContainerType = MapStateToPropsType & MapDispatchToPropsType
-
-type MapStateToPropsType = {
-    profile: ProfileType | null
-    status: string
-    authorizedUserID: number | null
-    isAuth: boolean
-
-}
-
-type MapDispatchToPropsType = {
-    getUsersProfile: (userId: number) => void
-    getStatus: (userId: number) => void
-    updateStatus: (status: string) => void
-    savePhoto: (photo: FileList | null) => void
-    saveProfile: (formData: ProfileFormDataType) => void
-}
-
 class ProfileContainer extends React.Component<PropsType> {
     refreshProfile() {
         let userId = this.props.match.params.userId
@@ -81,8 +57,32 @@ let mapStateToProps = (state: ReducerType): MapStateToPropsType => ({
     status: state.profilePage.status,
     authorizedUserID: state.auth.id,
     isAuth: state.auth.isAuth,
-
 })
+
+// Types
+
+type PathParamsType = {
+    userId: string | undefined
+}
+type PropsType = RouteComponentProps<PathParamsType> & ProfileContainerType
+
+type ProfileContainerType = MapStateToPropsType & MapDispatchToPropsType
+
+type MapStateToPropsType = {
+    profile: ProfileType | null
+    status: string
+    authorizedUserID: number | null
+    isAuth: boolean
+
+}
+
+type MapDispatchToPropsType = {
+    getUsersProfile: (userId: number) => void
+    getStatus: (userId: number) => void
+    updateStatus: (status: string) => void
+    savePhoto: (photo: FileList | null) => void
+    saveProfile: (formData: ProfileFormDataType) => void
+}
 
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {

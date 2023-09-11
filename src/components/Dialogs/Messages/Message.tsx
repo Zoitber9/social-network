@@ -5,10 +5,10 @@ export type MessagePropsType = {
     message: string
 }
 
-const Message = (props:MessagePropsType)=> {
+const Message = (props: MessagePropsType) => {
     return (
-        <div  key={props.id}>{props.message}</div>
+        <div key={props.id}>{props.message}</div>
     )
 }
 
-export  default Message
+export default Message

@@ -1,17 +1,7 @@
 import React from "react";
 import Header from "./Header";
 import {connect} from "react-redux";
-import {getAuthUserData, logout} from "../../redux/auth-reducer";
-
-type DataType = {
-    resultCode: number
-    messages: null
-    data: {
-        id: number
-        email: string
-        login: string
-    }
-}
+import { logout} from "../../redux/auth-reducer";
 
 class HeaderContainer extends React.Component<any, any> {
     render() {

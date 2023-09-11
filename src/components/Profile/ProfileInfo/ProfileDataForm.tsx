@@ -7,7 +7,6 @@ import {useSelector} from 'react-redux';
 import {AppRootStateType} from '../../../redux/redux-store';
 import s from './ProfileDataForm.module.css'
 
-
 export type ProfileFormDataType = {
     fullName: string
     lookingForAJob: boolean

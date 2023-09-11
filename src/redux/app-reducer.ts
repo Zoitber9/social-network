@@ -23,6 +23,8 @@ const appReducer = (state = initialState, action: ActionType): InitialStateAuthT
     }
 }
 
+// Actions
+
 export const initializedSuccess = () => {
     return {
         type: 'INITIALIZED_SUCCESS',
@@ -36,21 +38,21 @@ export const errorAction = (error: string) => {
     } as const
 }
 
-    export const initializeApp = () => (dispatch: ThunkDispatchType) => {
-        let promise = dispatch(getAuthUserData())
-        promise.then(() => {
-            dispatch(initializedSuccess())
-        })
-    }
+// Thunks
+export const initializeApp = () => (dispatch: ThunkDispatchType) => {
+    let promise = dispatch(getAuthUserData())
+    promise.then(() => {
+        dispatch(initializedSuccess())
+    })
+}
 
 // Types
-    export type InitialStateAuthType = {
-        initialized: boolean
-        error: null | string
-    }
+export type InitialStateAuthType = {
+    initialized: boolean
+    error: null | string
+}
 
-    export type InitializedSuccessACType = ReturnType<typeof initializedSuccess>
-    export type ErrorActionType = ReturnType<typeof errorAction>
+export type InitializedSuccessACType = ReturnType<typeof initializedSuccess>
+export type ErrorActionType = ReturnType<typeof errorAction>
 
-
-    export default appReducer
+export default appReducer

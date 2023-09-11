@@ -5,7 +5,6 @@ import ProfileStatus from "./ProfileStatus";
 import {ContactsKeysType, ProfileType} from "../../../redux/profile-reducer";
 import ava from '../../../assets/images/userPhoto.png'
 import {ProfileDataFormReduxForm, ProfileFormDataType} from "../ProfileInfo/ProfileDataForm";
-import {useAppDispatch} from "../../../redux/redux-store";
 
 type ProfileInfoType = {
     profile: ProfileType | null
@@ -18,7 +17,6 @@ type ProfileInfoType = {
 
 const ProfileInfo: React.FC<ProfileInfoType> = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile}) => {
     const [editMode, setEditMode] = useState<boolean>(false)
-    const dispatch = useAppDispatch()
 
     if (!profile) {
         return <Preloader/>
@@ -56,40 +54,8 @@ const ProfileInfo: React.FC<ProfileInfoType> = ({profile, status, updateStatus, 
         </div>
     )
 }
-
 export default ProfileInfo
 
-
-type ProfileDataFormPropsType = {
-    profile: ProfileType
-}
-
-export const ProfileDataForm: FC<ProfileDataFormPropsType> = ({profile}) => {
-    return (
-        <div>
-            <div>
-                <b>Full name</b>: {profile.fullName}
-            </div>
-            <div>
-                <b>Looking for a job</b>: {profile.lookingForAJob ? 'yes' : 'no'}
-            </div>
-            <div>
-                <b>My professional skills</b>: {profile.lookingForAJobDescription}
-            </div>
-
-            <div>
-                <b>About me</b>: {profile.aboutMe}
-            </div>
-            <div>
-                <b>Contacts</b>: {Object.keys(profile.contacts).map((key, ind) => {
-                return (
-                    <Contact key={ind} contactValue={profile.contacts[key as ContactsKeysType]} contactTitle={key}/>
-                )
-            })}
-            </div>
-        </div>
-    )
-}
 
 type ProfileDataPropsType = {
     profile: ProfileType
@@ -117,7 +83,7 @@ export const ProfileData: FC<ProfileDataPropsType> = ({profile, isOwner, goToEdi
                 <b>About me</b>: {profile.aboutMe}
             </div>
             <div>
-                <b>Contakts</b>: {Object.keys(profile.contacts).map((key, ind) => {
+                <b>Contacts</b>: {Object.keys(profile.contacts).map((key, ind) => {
                 return (
                     <Contact key={ind} contactValue={profile.contacts[key as ContactsKeysType]} contactTitle={key}/>
                 )

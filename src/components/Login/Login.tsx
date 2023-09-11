@@ -1,5 +1,5 @@
 import React from 'react';
-import {Field, InjectedFormProps, reduxForm} from 'redux-form';
+import {InjectedFormProps, reduxForm} from 'redux-form';
 import {createField, Input} from "../../common/FormControls/FormControls";
 import {required} from "../../utils/validator";
 import {useSelector} from "react-redux";
@@ -15,7 +15,6 @@ type FormDataType = {
     error: string
     captcha: string
 }
-
 
 const Login = () => {
     let isAuth = useSelector<ReducerType, boolean>(state => state.auth.isAuth)
@@ -37,7 +36,7 @@ const Login = () => {
 export default Login;
 
 
-const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error }) => {
+const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}) => {
     const captchaUrl = useSelector<ReducerType, string | null>(state => state.auth.captchaUrl)
     return (
         <form onSubmit={handleSubmit}>
@@ -46,7 +45,7 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, err
             {createField(Input, [required], 'rememberMe', '', {type: 'checkbox'}, 'remember Me')}
 
             {captchaUrl && <img src={captchaUrl} alt={'captcha'}/>}
-            {captchaUrl && createField(Input, [required], 'captcha', 'captcha', {type: 'text'}) }
+            {captchaUrl && createField(Input, [required], 'captcha', 'captcha', {type: 'text'})}
             {error && <div className={s.formSummeryError}>
                 {error}
             </div>}

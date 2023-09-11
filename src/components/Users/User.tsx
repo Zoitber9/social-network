@@ -5,13 +5,11 @@ import userPhoto
 import {UserType} from '../../redux/users-reducer';
 import {NavLink} from 'react-router-dom';
 
-
 type UserPropsType = {
     user: UserType
     followingInProgress: Array<number>
     unFollow: (userId: number) => void
     follow: (userId: number) => void
-
 }
 
 const User: React.FC<UserPropsType> = ({user, followingInProgress, unFollow, follow}) => {

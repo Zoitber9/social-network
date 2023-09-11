@@ -8,7 +8,6 @@ import {AddMessageFormRedux} from '../../components/Dialogs/AddMessageForm/AddMe
 type DialogsMessagesPropsType = {
     sendMessage: (newMessageBody: string) => void
     dialogsPage: InitialStateDialogsType
-
 }
 
 const Dialogs = (props: DialogsMessagesPropsType) => {
@@ -20,7 +19,6 @@ const Dialogs = (props: DialogsMessagesPropsType) => {
     })
 
     let messagesElement = props.dialogsPage.messages.map((i) => {
-
         return (
             <Message key={i.id} id={i.id} message={i.message}/>
         )

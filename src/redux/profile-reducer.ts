@@ -45,6 +45,8 @@ const profileReducer = (state: InitialStateProfileType = initialState, action: A
     }
 }
 
+// Actions
+
 export let addPostAC = (newPostText: string) => ({
     type: 'ADD-POST',
     newPostText
@@ -74,6 +76,7 @@ export let saveProfileSuccess = (formData: ProfileFormDataType) => ({
     formData
 } as const)
 
+// Thunks
 
 export let savePhoto = (file: FileList | null) => async (dispatch: Dispatch) => {
     let response = await profileAPI.savePhoto(file)
@@ -115,13 +118,6 @@ export let updateStatus = (status: string) => async (dispatch: Dispatch) => {
     }
 }
 
-
-export type addPostACType = ReturnType<typeof addPostAC>
-export type setUsersProfileType = ReturnType<typeof setUsersProfile>
-export type SetStatusType = ReturnType<typeof setStatus>
-
-export default profileReducer
-
 //types
 
 type PostsType = {
@@ -136,16 +132,15 @@ export type InitialStateProfileType = {
     status: string
 }
 
-export type ContactsKeysType = 'facebook' |
+export type ContactsKeysType =
+    'facebook' |
     'website' |
     'vk' |
-    'twitter' |
     'instagram' |
-    'youtube' |
-    'github' |
-    'mainLink'
+    'github'
 
-type PhotosType = {
+
+export type PhotosType = {
     small: string
     large: string
 }
@@ -160,5 +155,11 @@ export type ProfileType = {
     photos: PhotosType
 }
 
+export type addPostACType = ReturnType<typeof addPostAC>
+export type setUsersProfileType = ReturnType<typeof setUsersProfile>
+export type SetStatusType = ReturnType<typeof setStatus>
+
 export type DeletePostType = ReturnType<typeof deletePost>
 export type SavePhotoSuccessType = ReturnType<typeof savePhotoSuccess>
+
+export default profileReducer

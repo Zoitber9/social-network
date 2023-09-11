@@ -6,15 +6,9 @@ import {InitialStateProfileType} from '../../../redux/profile-reducer';
 import {maxLengthCreator, required} from "../../../utils/validator";
 import {Textarea} from "../../../common/FormControls/FormControls";
 
-export type PostsPropsType = {
-    profilePage: InitialStateProfileType
-    updateNewPostText?: (text: string) => void
-    addPost: (newPostText: string) => void
 
-}
 
 const MyPosts: React.FC<PostsPropsType> = memo((props: PostsPropsType) => {
-
     let postsElements = props.profilePage.posts.map((i) => {
             return (
                 <Post key={i.id} id={i.id} message={i.message} like={i.likesCount}/>
@@ -36,10 +30,6 @@ const MyPosts: React.FC<PostsPropsType> = memo((props: PostsPropsType) => {
 })
 export default MyPosts
 
-type FormDataType = {
-    newMessageBody: string
-}
-
 const maxLength10 = maxLengthCreator(10)
 const AddNewPostForm: React.FC<InjectedFormProps<FormDataType>> = memo((props) => {
     return (
@@ -58,5 +48,17 @@ const AddNewPostForm: React.FC<InjectedFormProps<FormDataType>> = memo((props) =
         </form>
     )
 })
+
+// Types
+
+type FormDataType = {
+    newMessageBody: string
+}
+
+export type PostsPropsType = {
+    profilePage: InitialStateProfileType
+    updateNewPostText?: (text: string) => void
+    addPost: (newPostText: string) => void
+}
 
 const AddNewPostFormRedux = reduxForm<FormDataType>({form: 'dialogAddMessageForm'})(AddNewPostForm)

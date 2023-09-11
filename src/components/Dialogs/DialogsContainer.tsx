@@ -7,15 +7,6 @@ import {ReducerType} from "../../redux/redux-store";
 import {withAuthRedirect} from "../../hoc/WithAuthRedirect";
 import {addPostAC} from "../../redux/profile-reducer";
 
-
-type mapStateToPropsType = {
-    dialogsPage: InitialStateDialogsType
-}
-
-type mapDispatchToPropsType = {
-    sendMessage: (newMessageBody: string) => void
-}
-
 const mapStateToProps = (state: ReducerType): mapStateToPropsType => {
     return {
         dialogsPage: state.messagesPage
@@ -27,6 +18,15 @@ const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
             dispatch(addPostAC(newMessageBody))
         }
     }
+}
+
+// Types
+type mapStateToPropsType = {
+    dialogsPage: InitialStateDialogsType
+}
+
+type mapDispatchToPropsType = {
+    sendMessage: (newMessageBody: string) => void
 }
 
 export default compose<React.ComponentType>(connect(mapStateToProps, mapDispatchToProps),

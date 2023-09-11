@@ -14,29 +14,7 @@ import {
     getTotalUsersCount, getUsersSuper
 } from "../../redux/users-selectors";
 
-type MapStatePropsType = {
-    users: Array<UserType>
-    pageSize: number
-    totalUsersCount: number
-    currentPage: number
-    isFetching: boolean
-    followingInProgress: Array<number>
-}
-
-type UsersAPIComponentPropsType = {
-    users: Array<UserType>
-    follow: (userId: number) => void
-    unFollow: (userId: number) => void
-    totalUsersCount: number
-    pageSize: number
-    currentPage: number
-    setCurrentPage: (pageNumber: number)=>void
-    isFetching: boolean
-    followingInProgress: Array<number>
-    requestUsers: (currentPage: number, pageSize: number)=> void
-}
-
-class UsersContainer   extends React.Component<UsersAPIComponentPropsType, {}> {
+class UsersContainer extends React.Component<UsersAPIComponentPropsType, {}> {
 
     componentDidMount() {
         const {currentPage, pageSize} = this.props
@@ -50,9 +28,9 @@ class UsersContainer   extends React.Component<UsersAPIComponentPropsType, {}> {
     render() {
         return (
             <>
-                {this.props.isFetching ? <Preloader /> : null }
+                {this.props.isFetching ? <Preloader/> : null}
                 <Users
-                    totalUsersCount={ this.props.totalUsersCount}
+                    totalUsersCount={this.props.totalUsersCount}
                     pageSize={this.props.pageSize}
                     currentPage={this.props.currentPage}
                     users={this.props.users}
@@ -77,7 +55,32 @@ const mapStateToProps = (state: ReducerType): MapStatePropsType => {
     }
 }
 
+// Types
+
+type MapStatePropsType = {
+    users: Array<UserType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+    isFetching: boolean
+    followingInProgress: Array<number>
+}
+
+type UsersAPIComponentPropsType = {
+    users: Array<UserType>
+    follow: (userId: number) => void
+    unFollow: (userId: number) => void
+    totalUsersCount: number
+    pageSize: number
+    currentPage: number
+    setCurrentPage: (pageNumber: number) => void
+    isFetching: boolean
+    followingInProgress: Array<number>
+    requestUsers: (currentPage: number, pageSize: number) => void
+}
+
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {
         follow, unFollow,
-        setCurrentPage, requestUsers}))(UsersContainer)
+        setCurrentPage, requestUsers
+    }))(UsersContainer)
