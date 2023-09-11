@@ -16,7 +16,7 @@ import usersReducer, {
 import authReducer, {GetCaptchaUrlType, setUserDataACType} from "./auth-reducer";
 import thunk, {ThunkDispatch} from 'redux-thunk';
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
-import appReducer, {InitializedSuccessACType} from "../redux/app-reducer";
+import appReducer, {ErrorActionType, InitializedSuccessACType} from "../redux/app-reducer";
 
 let rootReducer = combineReducers({
     profilePage: profileReducer,
@@ -46,6 +46,7 @@ export type ActionType =
     | DeletePostType
     | SavePhotoSuccessType
     | GetCaptchaUrlType
+    | ErrorActionType
 
 
 let store = createStore(rootReducer, applyMiddleware(thunk))

@@ -3,6 +3,7 @@ import {Dispatch} from "redux";
 import {profileAPI} from "../api/api";
 import {ProfileFormDataType} from "../components/Profile/ProfileInfo/ProfileDataForm";
 import {stopSubmit} from "redux-form";
+import {AxiosError} from "axios";
 
 let initialState = {
     posts: [
@@ -74,7 +75,6 @@ export let saveProfileSuccess = (formData: ProfileFormDataType) => ({
 } as const)
 
 
-
 export let savePhoto = (file: FileList | null) => async (dispatch: Dispatch) => {
     let response = await profileAPI.savePhoto(file)
     if (response.data.resultCode === 0) {
@@ -83,15 +83,20 @@ export let savePhoto = (file: FileList | null) => async (dispatch: Dispatch) => 
 }
 
 export let saveProfile = (formData: ProfileFormDataType) => async (dispatch: ThunkDispatchType, getState: () => AppRootStateType) => {
-    const userId = getState().auth.id
-    let response = await profileAPI.saveProfile(formData)
-    if (response.data.resultCode === 0) {
-        if (userId) {
-            dispatch(getUsersProfile(+userId))
+    try {
+        const userId = getState().auth.id
+        let response = await profileAPI.saveProfile(formData)
+        if (response.data.resultCode === 0) {
+            if (userId) {
+                dispatch(getUsersProfile(+userId))
+            }
+        } else {
+            dispatch(stopSubmit('edit-profile', {error: response.data.messages[0]}))
+            return Promise.reject(response.data.messages[0])
         }
-    } else {
-        dispatch(stopSubmit('edit-profile',{error: response.data.messages[0]}))
-        return Promise.reject(response.data.messages[0])
+    } catch (e) {
+        const error = e as AxiosError
+        alert(error.message)
     }
 }
 

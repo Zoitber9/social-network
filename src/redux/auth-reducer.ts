@@ -1,7 +1,6 @@
 import {Dispatch} from "redux";
 import {authAPI, securityAPI} from "../api/api";
 import {ActionType, ThunkDispatchType} from "./redux-store";
-import {stopSubmit} from "redux-form";
 
 let initialState: InitialStateAuthType = {
     id: null,
@@ -54,11 +53,12 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
     if (response.data.resultCode === 0) {
         dispatch(getAuthUserData())
     } else {
-        if(response.data.resultCode === 10) {
+        if (response.data.resultCode === 10) {
             dispatch(getCaptchaUrl())
         }
     }
 }
+
 export const logout = () => async (dispatch: ThunkDispatchType) => {
     const response = await authAPI.logout()
     if (response.data.resultCode === 0) {

@@ -1,46 +1,56 @@
 import {ActionType, ThunkDispatchType} from './redux-store';
 import {getAuthUserData} from './auth-reducer';
 
-
-export enum AuthActionTypes {
-    INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS',
-}
-
-
-export type InitialStateAuthType = {
-    initialized: boolean
-}
-
-
 let initialState: InitialStateAuthType = {
     initialized: false,
-
+    error: null
 }
 
 const appReducer = (state = initialState, action: ActionType): InitialStateAuthType => {
     switch (action.type) {
-        case AuthActionTypes.INITIALIZED_SUCCESS:
+        case 'INITIALIZED_SUCCESS':
             return {
                 ...state,
                 initialized: true
+            }
+        case 'ERROR_SUCCESS':
+            return {
+                ...state,
+                error: action.error
             }
         default:
             return state;
     }
 }
-export type InitializedSuccessACType = ReturnType<typeof initializedSuccess>
+
 export const initializedSuccess = () => {
     return {
-        type: AuthActionTypes.INITIALIZED_SUCCESS,
+        type: 'INITIALIZED_SUCCESS',
     } as const
 }
-export const initializeApp = () => (dispatch: ThunkDispatchType) => {
-    let promise = dispatch(getAuthUserData())
-    promise.then(()=> {
-        dispatch(initializedSuccess())
-    })
 
+export const errorAction = (error: string) => {
+    return {
+        type: 'ERROR_SUCCESS',
+        error
+    } as const
 }
 
+    export const initializeApp = () => (dispatch: ThunkDispatchType) => {
+        let promise = dispatch(getAuthUserData())
+        promise.then(() => {
+            dispatch(initializedSuccess())
+        })
+    }
 
-export default appReducer
+// Types
+    export type InitialStateAuthType = {
+        initialized: boolean
+        error: null | string
+    }
+
+    export type InitializedSuccessACType = ReturnType<typeof initializedSuccess>
+    export type ErrorActionType = ReturnType<typeof errorAction>
+
+
+    export default appReducer
